@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.DashboardController">
+    <Label fx:id="welcomeLabel" layoutX="176.0" layoutY="41.0" prefHeight="50.0" prefWidth="232.0" text="Admin Page!">
+      <font>
+         <Font size="45.0" />
+      </font></Label>
+
+
+    <Button fx:id="logoutButton" layoutX="14.0" layoutY="337.0" onAction="#handleLogoutAction" prefHeight="42.0" prefWidth="84.0" text="Logout" />
+   <MenuBar fx:id="MenuBar" accessibleRole="BUTTON" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+     <menus>
+       <Menu fx:id="File" mnemonicParsing="false" text="File" />
+       <Menu fx:id="UsersButton" mnemonicParsing="false" text="Users" />
+       <Menu fx:id="BookButton" mnemonicParsing="false" text="books">
+            <items>
+               <MenuItem fx:id="addnewbookButton" mnemonicParsing="false" onAction="#handleAddNewBookAction" text="add new book" />
+                <MenuItem fx:id="seethelistButton" mnemonicParsing="false" onAction="#handleSeeTheListAction" text="see the list of the books" />
+            </items></Menu>
+     </menus>
+   </MenuBar>
+   <TableView fx:id="booksTable" layoutX="75.0" layoutY="121.0" managed="false" prefHeight="200.0" prefWidth="451.0" visible="false">
+     <columns>
+       <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />
+       <TableColumn fx:id="authorColumn" prefWidth="75.0" text="author" />
+         <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="isbn" />
+         <TableColumn fx:id="yearofpublishingColumn" prefWidth="75.0" text="year of publishing" />
+         <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="category" />
+         <TableColumn fx:id="copiesColumn" prefWidth="75.0" text="number of copies" />
+     </columns>
+   </TableView>
+
+</AnchorPane>

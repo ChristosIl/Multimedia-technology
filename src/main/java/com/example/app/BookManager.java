@@ -64,4 +64,18 @@ public class BookManager {
             }
         }
     }
+
+    //deleting a book
+    public void deleteBook(Book book) {
+        books.removeIf(b -> b.getIsbn().equals(book.getIsbn()));
+        saveBooks(); // Ensure this method writes the updated list to the file
+    }
+
+
+    public void deleteBooksByCategory(String category) {
+        books.removeIf(book -> book.getCategory().equals(category));
+        saveBooks();
+    }
+
+
 }

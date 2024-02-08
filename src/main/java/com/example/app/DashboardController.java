@@ -12,6 +12,7 @@ import java.io.IOException;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.beans.binding.Bindings;
 
 public class DashboardController {
 
@@ -62,9 +63,40 @@ public class DashboardController {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         copiesColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfCopies"));
 
-        // Example: Load books into the table
-        // This step assumes you have a method to load books from your data source
-        booksTable.setItems(loadBooks()); // Ensure you implement loadBooks() to return ObservableList<Book>
+        //load the books
+        booksTable.setItems(loadBooks());
+
+        //context menu to delete book
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem deleteItem = new MenuItem("Delete Book");
+        MenuItem editItem = new MenuItem("Edit");
+        contextMenu.getItems().addAll(deleteItem, editItem);
+
+        //Action for delete context menu
+        deleteItem.setOnAction(event -> {
+            Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                deleteBook(selectedBook);
+            }
+        });
+        //Action for Edit context menu
+       /* editItem.setOnAction(event -> {
+            Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                showEditBookForm(selectedBook);
+            }
+        });*/
+
+        //Attach the context menu to the table rows
+        booksTable.setRowFactory(tv -> {
+            TableRow<Book> row = new TableRow<>();
+            row.contextMenuProperty().bind(
+                    Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(contextMenu)
+            );
+            return row;
+        });
     }
 
     @FXML
@@ -109,5 +141,12 @@ public class DashboardController {
         ObservableList<Book> observableBooks = FXCollections.observableArrayList(bookManager.getBooks());
 
         return observableBooks;
+    }
+
+    private void deleteBook(Book book) {
+        // Correctly calling deleteBook on BookManager's instance
+        BookManager.getInstance().deleteBook(book);
+        // Refresh the TableView with the updated list
+        booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
     }
 }

@@ -11,8 +11,21 @@ import java.io.IOException;
 
 public class UserDashboardController {
 
+    private User currentUser;
+
     @FXML
     private Label welcomeLabel; // Reference to the welcome label
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        updateDashboard();
+    }
+
+    private void updateDashboard() {
+        // Example: Update the welcome label with the user's name
+        welcomeLabel.setText("Welcome, " + currentUser.getName());
+        // You can also update other parts of the dashboard here based on the currentUser
+    }
 
     // Method to update the welcome text
     public void setWelcomeText(String text) {

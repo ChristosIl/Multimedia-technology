@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -15,6 +16,9 @@ public class EditUserFormController {
 
     @FXML
     private TextField username, nameField, password, surname, idnumberField, email;
+
+    @FXML
+    private Label usernameErrorLabel, idNumberErrorLabel, passwordLabel, nameLabel, surnameLabel, emailErrorLabel;
 
     //initialize data from Uselistcontroller
     public void initData(User user) {
@@ -50,6 +54,11 @@ public class EditUserFormController {
 
     @FXML
     private void handleSaveChangesAction() throws IOException{
+        boolean allFieldsValid = validateFields();
+
+        if (!allFieldsValid) {
+            return; //Stop the sign-up process if any field is invalid
+        }
         // Update the currentUser object with new values from form fields
         currentUser.setUsername(username.getText());
         currentUser.setPassword(password.getText());
@@ -77,5 +86,48 @@ public class EditUserFormController {
         Stage stage = (Stage) username.getScene().getWindow();
         stage.setScene(new Scene(userListRoot));
         stage.show();
+    }
+
+    private boolean validateFields() {
+        boolean allFieldsValid = true;
+
+        //Check if username is empty
+        if (username.getText().isEmpty()) {
+            usernameErrorLabel.setText("This field is empty");
+            allFieldsValid = false;
+        }
+
+        //Check if password is empty
+        if (password.getText().isEmpty()) {
+            passwordLabel.setText("This field is empty");
+            allFieldsValid = false;
+        }
+
+        //Check if Name is empty
+        if (nameField.getText().isEmpty()) {
+            nameLabel.setText("This field is empty");
+            allFieldsValid = false;
+        }
+
+        //Check if Surname is empty
+        if (surname.getText().isEmpty()) {
+            surnameLabel.setText("This field is empty");
+            allFieldsValid = false;
+        }
+
+        //Check if Id_number is empty
+        if (idnumberField.getText().isEmpty()) {
+            idNumberErrorLabel.setText("This field is empty");
+            allFieldsValid = false;
+        }
+
+        //Validate email format
+        String emailText = email.getText();
+        if (emailText.isEmpty() || !emailText.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
+            emailErrorLabel.setText("Invalid email format");
+            allFieldsValid = false;
+        }
+
+        return allFieldsValid;
     }
 }

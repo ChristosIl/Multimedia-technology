@@ -51,4 +51,25 @@ public class User implements Serializable {
     public String getEmail() {
         return email;
     }
+
+    //SETTERS
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
+

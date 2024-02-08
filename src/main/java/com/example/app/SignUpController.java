@@ -74,7 +74,7 @@ public class SignUpController {
             return; //Stop the sign-up process if any field is invalid
         }
 
-        List<User> users = UserDataManager.loadUserList();
+        List<User> users = UserDataManager.getInstance().loadUserList();
         boolean usernameExists = false, idNumberExists = false, emailExists = false;
 
         for (User user : users) {
@@ -90,10 +90,9 @@ public class SignUpController {
         }
 
         if (!usernameExists && !idNumberExists && !emailExists) {
-            users.add(new User(username.getText(), password.getText(), Name.getText(), Surname.getText(), Id_number.getText(), email.getText()));
-            UserDataManager.saveUserList(users);
-            // Clear form fields and display success message or navigate
-            clearFormFields();
+            UserDataManager.getInstance().getUsers().add(new User(username.getText(), password.getText(), Name.getText(), Surname.getText(), Id_number.getText(), email.getText()));
+            UserDataManager.getInstance().saveUserList();
+            clearForm();
         } else {
             if (usernameExists) {
                 usernameErrorLabel.setText("Username already in use.");
@@ -105,6 +104,8 @@ public class SignUpController {
                 emailErrorLabel.setText("Email address already in use.");
             }
         }
+
+        //clearForm();
     }
 
     private void clearErrorLabels() {
@@ -160,9 +161,7 @@ public class SignUpController {
     }
 
 
-    private void clearFormFields() { //TODO
-        // Clear all form fields after successful registration
-    }
+
 
     private void loadScene(String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -170,6 +169,16 @@ public class SignUpController {
         Stage stage = (Stage) SignUp.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    //clear the Text fields /---probably not needed here---/
+    private void clearForm(){
+            username.clear();
+            password.clear();
+            Name.clear();
+            Surname.clear();
+            Id_number.clear();
+            email.clear();
     }
 
 }

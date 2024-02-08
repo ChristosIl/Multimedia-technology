@@ -71,7 +71,7 @@ public class BookManager {
         saveBooks(); // Ensure this method writes the updated list to the file
     }
 
-
+    //TODO
     public void deleteBooksByCategory(String category) {
         books.removeIf(book -> book.getCategory().equals(category));
         saveBooks();

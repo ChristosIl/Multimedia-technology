@@ -45,7 +45,7 @@ public class HelloController {
             System.out.println("Username: " + usernameText + ", Password: " + passwordText);
 
             // Load the user list
-            List<User> users = UserDataManager.loadUserList();
+            List<User> users = UserDataManager.getInstance().loadUserList();
 
             // Check if the user is not the admin and their credentials exist
             if (!usernameText.equalsIgnoreCase("admin")) {

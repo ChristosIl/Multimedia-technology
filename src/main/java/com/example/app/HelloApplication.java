@@ -11,11 +11,11 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Initialize user list with admin if not already done
-        UserDataManager.initializeUserList();
+        UserDataManager.getInstance().initializeUserList();
         // Clear the user list (if needed)
         //UserDataManager.clearUserList();
         // Optionally, print users to console for debugging purposes
-        UserDataManager.printUsers();
+        UserDataManager.getInstance().printUsers();
 
 
         // Initialize BookManager and print list of books to console

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -39,6 +40,7 @@ public class DashboardController {
         welcomeLabel.setText(text);
     }
 
+    //see the list of books
     @FXML
     private void handleSeeTheListAction() {
         // Toggle visibility and managed state of the booksTable
@@ -51,6 +53,18 @@ public class DashboardController {
         if (!isVisible) {
             booksTable.setItems(loadBooks()); // Assuming loadBooks() loads your book data
         }
+    }
+
+    //see the list of Users
+    @FXML
+    private void handleSeeUsersAction() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserList.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("User List");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.NONE); //non modal window
+        stage.showAndWait();
     }
 
     @FXML

@@ -23,6 +23,8 @@ public class Book implements Serializable{
         this.numberOfCopies = numberOfCopies;
 
     }
+    //---TODO SETTERS FOR BOOK-----
+
 
     //getters
     public String getTitle() {

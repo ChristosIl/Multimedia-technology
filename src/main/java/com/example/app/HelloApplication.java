@@ -17,10 +17,14 @@ public class HelloApplication extends Application {
         // Optionally, print users to console for debugging purposes
         UserDataManager.getInstance().printUsers();
 
+        BorrowingRecordManager borrowedbooks = BorrowingRecordManager.getInstance();
+        borrowedbooks.printAllBorrowingRecords();
 
-        // Initialize BookManager and print list of books to console
+                // Initialize BookManager and print list of books to console
         BookManager bookManager = BookManager.getInstance(); // Ensure this matches your Singleton pattern
         bookManager.printBooks(); // This will print the list of books to the console
+
+
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);

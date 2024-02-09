@@ -130,6 +130,23 @@ public class DashboardController {
         stage.show();
     }
 
+    @FXML
+    private void handleseeborrowedbookslist() throws IOException{
+        try {
+            //Load the sign-up page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BorrowedBooksList.fxml"));
+            Parent root = loader.load();
+
+            //Get the current window (stage) from any component, here using the username TextField
+            Stage stage = (Stage) booksTable.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the exception
+        }
+    }
+
 
     @FXML
     private void handleLogoutAction() throws IOException {

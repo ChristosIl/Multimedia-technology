@@ -29,10 +29,11 @@
             <items>
                <MenuItem fx:id="addnewbookButton" mnemonicParsing="false" onAction="#handleAddNewBookAction" text="add new book" />
                 <MenuItem fx:id="seethelistButton" mnemonicParsing="false" onAction="#handleSeeTheListAction" text="see the list of the books" />
+               <MenuItem fx:id="seetheloanlistButton" mnemonicParsing="false" onAction="#handleseeborrowedbookslist" text="see the loan list" />
             </items></Menu>
      </menus>
    </MenuBar>
-   <TableView fx:id="booksTable" layoutX="75.0" layoutY="121.0" managed="false" prefHeight="200.0" prefWidth="451.0" visible="true">
+   <TableView fx:id="booksTable" layoutX="75.0" layoutY="121.0" managed="false" prefHeight="200.0" prefWidth="451.0" visible="false">
      <columns>
        <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />
        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="author" />

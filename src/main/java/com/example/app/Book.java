@@ -1,8 +1,10 @@
 package com.example.app;
+
 import java.io.Serializable;
 
-public class Book implements Serializable{
+public class Book implements Serializable {
     private static final long serialVersionUID = 1L; //needs for serialization
+
     //book's data
     private String title;
     private String author;
@@ -12,7 +14,7 @@ public class Book implements Serializable{
     private String category;
     private int numberOfCopies;
 
-    //Constructor
+    // Constructor
     public Book(String title, String author, String publishingHouse, String isbn, int yearOfPublishing, String category, int numberOfCopies) {
         this.title = title;
         this.author = author;
@@ -21,12 +23,32 @@ public class Book implements Serializable{
         this.yearOfPublishing = yearOfPublishing;
         this.category = category;
         this.numberOfCopies = numberOfCopies;
-
     }
-    //---TODO SETTERS FOR BOOK-----
 
+    // Setters
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    public void setPublishingHouse(String publishingHouse) {
+        this.publishingHouse = publishingHouse;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+    public void setYearOfPublishing(int yearOfPublishing) {
+        this.yearOfPublishing = yearOfPublishing;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public void setNumberOfCopies(int numberOfCopies) {
+        this.numberOfCopies = numberOfCopies;
+    }
 
-    //getters
+    // Getters
     public String getTitle() {
         return title;
     }
@@ -54,5 +76,4 @@ public class Book implements Serializable{
     public int getNumberOfCopies() {
         return numberOfCopies;
     }
-
 }

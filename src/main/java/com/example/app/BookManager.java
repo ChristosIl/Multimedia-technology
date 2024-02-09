@@ -77,5 +77,17 @@ public class BookManager {
         saveBooks();
     }
 
+    public void decreaseBookCopies(String isbn) {
+        for (Book book : books) {
+            if (book.getIsbn().equals(isbn) && book.getNumberOfCopies() > 0) {
+                book.setNumberOfCopies(book.getNumberOfCopies() - 1);
+                saveBooks();
+                break;
+            }
+        }
+    }
+
+
+
 
 }

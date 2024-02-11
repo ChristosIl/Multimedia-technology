@@ -15,7 +15,7 @@
          </font>
       </Text>
       <Button fx:id="GoBackButton" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="42.0" prefWidth="84.0" text="Go Back" />
-      <TableView fx:id="tableView" layoutX="36.0" layoutY="85.0" prefHeight="216.0" prefWidth="529.0">
+      <TableView fx:id="tableView" layoutX="73.0" layoutY="84.0" prefHeight="216.0" prefWidth="454.0">
         <columns>
           <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />
           <TableColumn fx:id="authorColumn" prefWidth="75.0" text="author" />

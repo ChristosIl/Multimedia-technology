@@ -92,6 +92,26 @@ public class UserDashboardController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private void handleBookonloanuserslist()throws IOException{
+        try {
+            //Load the sign-up page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("UsersBooksOnLoan.fxml"));
+            Parent root = loader.load();
+
+            UsersBooksOnLoanController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+
+            //Get the current window (stage) from any component, here using the username TextField
+            Stage stage = (Stage) booksTable.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the exception
+        }
+    }
+
     //-------Set the Welcome text and name
     public void setCurrentUser(User user) {
         this.currentUser = user;
@@ -148,4 +168,6 @@ public class UserDashboardController {
             BorrowingRecordManager.getInstance().addRecord(record);
         }
     }
+
+
 }

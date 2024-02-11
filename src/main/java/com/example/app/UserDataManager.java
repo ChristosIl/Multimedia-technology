@@ -75,6 +75,7 @@ public class UserDataManager {
     }
 
     public void deleteUser(User user) {
+        BorrowingRecordManager.getInstance().deleteUserLoans(user.getIdNumber());
         users.removeIf(b -> b.getIdNumber().equals(user.getIdNumber()));
         saveUserList(); // Ensure this method writes the updated list to the file
     }

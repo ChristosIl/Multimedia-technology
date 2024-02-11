@@ -66,7 +66,7 @@ public class SignUpController {
     }
 
     @FXML
-    private void handlerSigningUp() {
+    private void handlerSigningUp() throws IOException {
         clearErrorLabels();
         boolean allFieldsValid = validateFields();
 
@@ -90,9 +90,21 @@ public class SignUpController {
         }
 
         if (!usernameExists && !idNumberExists && !emailExists) {
-            UserDataManager.getInstance().getUsers().add(new User(username.getText(), password.getText(), Name.getText(), Surname.getText(), Id_number.getText(), email.getText()));
+            User newUser = new User(username.getText(), password.getText(), Name.getText(), Surname.getText(), Id_number.getText(), email.getText());
+            UserDataManager.getInstance().getUsers().add(newUser);
             UserDataManager.getInstance().saveUserList();
             clearForm();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("User-Dashboard.fxml"));
+            Parent root = loader.load();
+
+            UserDashboardController dashboardController = loader.getController();
+            dashboardController.setCurrentUser(newUser); // Assuming you have such a method in your dashboard controller
+
+            Stage stage = (Stage) SignUp.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } else {
             if (usernameExists) {
                 usernameErrorLabel.setText("Username already in use.");

@@ -3,6 +3,8 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
+
 public class BorrowingRecordManager {
 
     private static BorrowingRecordManager instance; //Singleton instance
@@ -79,4 +81,55 @@ public class BorrowingRecordManager {
                 .count();
     }
 
+    public void returnBook(String userId, String isbn) {
+        BorrowingRecord recordToReturn = null;
+        for (BorrowingRecord record : borrowingRecords) {
+            if (record.getUserIdNumber().equals(userId) && record.getBookIsbn().equals(isbn)) {
+                recordToReturn = record;
+                break;
+            }
+        }
+
+        if (recordToReturn != null) {
+            //Increase book copies in BookManager
+            BookManager.getInstance().increaseBookCopies(isbn);
+            // Remove the record or mark it as returned based on your design
+            borrowingRecords.remove(recordToReturn);
+            saveBorrowingRecords(); // Don't forget to persist the changes
+        } else {
+            System.out.println("No borrowing record found for the book to return.");
+        }
+    }
+
+    public void removeRecord(String userId, String isbn) {
+        // Find the record to remove
+        BorrowingRecord recordToRemove = borrowingRecords.stream()
+                .filter(record -> record.getUserIdNumber().equals(userId) && record.getBookIsbn().equals(isbn))
+                .findFirst()
+                .orElse(null); // or use .findAny() if you're not concerned about finding multiple matches
+
+        // If a record was found, remove it and update the book's availability
+        if (recordToRemove != null) {
+            borrowingRecords.remove(recordToRemove);
+            saveBorrowingRecords();
+            // Optionally, increase book copies in BookManager if you want to reflect the return in the inventory
+            BookManager.getInstance().increaseBookCopies(isbn);
+        } else {
+            System.out.println("No borrowing record found for the given user ID and ISBN.");
+        }
+    }
+    public void deleteUserLoans(String userId) {
+        List<BorrowingRecord> recordsToDelete = borrowingRecords.stream()
+                .filter(record -> record.getUserIdNumber().equals(userId))
+                .collect(Collectors.toList());
+
+        for (BorrowingRecord record : recordsToDelete) {
+            BookManager.getInstance().increaseBookCopies(record.getBookIsbn());
+        }
+
+        borrowingRecords.removeIf(record -> record.getUserIdNumber().equals(userId));
+        saveBorrowingRecords();
+    }
 }
+
+

@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L; //needs for serialization
 
+    private float averageRating;
+    private int rating;
     //book's data
     private String title;
     private String author;
@@ -26,6 +28,9 @@ public class Book implements Serializable {
     }
 
     // Setters
+    public void setRating(int Rating) {
+        this.rating = Rating;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -49,6 +54,12 @@ public class Book implements Serializable {
     }
 
     // Getters
+    public float getAverageRating() {
+        return averageRating;
+    }
+    public int getRating() {
+        return rating;
+    }
     public String getTitle() {
         return title;
     }

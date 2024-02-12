@@ -26,7 +26,7 @@ public class BookManager {
         saveBooks();
     }
 
-    private void saveBooks() {
+    public void saveBooks() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BOOKS_FILE))) {
             oos.writeObject(books);
         } catch (IOException e) {
@@ -69,6 +69,7 @@ public class BookManager {
     public void deleteBook(Book book) {
         books.removeIf(b -> b.getIsbn().equals(book.getIsbn()));
         saveBooks(); // Ensure this method writes the updated list to the file
+        BorrowingRecordManager.getInstance().deleteRecordsByBookIsbn(book.getIsbn());
     }
 
     //TODO
@@ -97,6 +98,14 @@ public class BookManager {
         }
     }
 
+    public Book getBookByIsbn(String isbn) {
+        for (Book book : books) {
+            if (book.getIsbn().equals(isbn)) {
+                return book;
+            }
+        }
+        return null; // Book not found
+    }
 
 
 

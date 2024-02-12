@@ -169,5 +169,25 @@ public class UserDashboardController {
         }
     }
 
+    @FXML
+    private void handleBooksratingslist()throws IOException{
+        try {
+            //Load the sign-up page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RaitingList.fxml"));
+            Parent root = loader.load();
+
+            RaitingListController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+
+            //Get the current window (stage) from any component, here using the username TextField
+            Stage stage = (Stage) booksTable.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the exception
+        }
+    }
+
 
 }

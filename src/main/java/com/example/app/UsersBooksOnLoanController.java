@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 public class UsersBooksOnLoanController {
     @FXML
     private Button GoBackButton;
@@ -72,13 +74,14 @@ public class UsersBooksOnLoanController {
     private void setupContextMenu() {
         // Create the context menu and return option
         ContextMenu contextMenu = new ContextMenu();
-        MenuItem returnMenuItem = new MenuItem("Return");
-        contextMenu.getItems().add(returnMenuItem);
+
 
         tableView.setRowFactory(tv -> {
             TableRow<BorrowingRecord> row = new TableRow<>();
             ContextMenu rowMenu = new ContextMenu();
             MenuItem returnItem = new MenuItem("Return this book");
+            MenuItem rateMenuItem = new MenuItem("Rate this book");
+
 
             returnItem.setOnAction(event -> {
                 BorrowingRecord selectedRecord = row.getItem();
@@ -87,7 +90,16 @@ public class UsersBooksOnLoanController {
                     System.out.println("Return action triggered for: " + selectedRecord.getBookIsbn());
                 }
             });
-            rowMenu.getItems().addAll(returnItem);
+
+
+            rateMenuItem.setOnAction(event -> {
+                BorrowingRecord selectedRecord = row.getItem();
+                if (selectedRecord != null) {
+                    showRatingDialog(selectedRecord);
+                }
+            });
+
+            rowMenu.getItems().addAll(returnItem, rateMenuItem);
 
             // Only display context menu for non-null items.
             row.contextMenuProperty().bind(
@@ -109,6 +121,47 @@ public class UsersBooksOnLoanController {
         confirmationAlert.setHeaderText(null);
         confirmationAlert.setContentText("The book has been successfully returned.");
         confirmationAlert.showAndWait();
+    }
+
+    private void showRatingDialog(BorrowingRecord record) {
+        // Create a custom dialog
+        Dialog<Integer> dialog = new Dialog<>();
+        dialog.setTitle("Rate This Book");
+        dialog.setHeaderText("Select your rating for the book");
+
+        // Set the button types.
+        ButtonType rateButtonType = new ButtonType("Rate", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(rateButtonType, ButtonType.CANCEL);
+
+        // Create a ChoiceBox for ratings
+        ChoiceBox<Integer> ratingChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(1, 2, 3, 4, 5));
+        ratingChoiceBox.setValue(5); // Default to highest rating
+
+        dialog.getDialogPane().setContent(ratingChoiceBox);
+
+        // Convert the result to a rating when the rate button is clicked.
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == rateButtonType) {
+                return ratingChoiceBox.getValue();
+            }
+            return null;
+        });
+
+        Optional<Integer> result = dialog.showAndWait();
+
+        result.ifPresent(rating -> {
+            System.out.println("Rating: " + rating); // For debugging
+            updateBookRating(record, rating);
+        });
+    }
+
+    private void updateBookRating(BorrowingRecord record, int rating) {
+        // Assuming BookManager can access and update books by ISBN
+        Book book = BookManager.getInstance().getBookByIsbn(record.getBookIsbn());
+        if (book != null) {
+            book.setRating(rating); // Assuming setRating(int rating) updates the book's rating
+            BookManager.getInstance().saveBooks(); // Assuming saveBooks() method exists to persist changes
+        }
     }
 
 }

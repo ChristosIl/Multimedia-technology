@@ -1,15 +1,19 @@
 package com.example.app;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class HelloController {
@@ -21,7 +25,13 @@ public class HelloController {
     private Label errorLabel; // Reference to the error label
     @FXML
     private Label errorLabel_2;
+    @FXML
+    private ListView<String> topRatedBooksListView;
 
+    @FXML
+    public void initialize() {
+        displayTopRatedBooks();
+    }
     @FXML
     protected void handleLoginAction() throws IOException {
 
@@ -117,5 +127,23 @@ public class HelloController {
         Stage stage = (Stage) username.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    private void displayTopRatedBooks() {
+        List<Book> books = BookManager.getInstance().getBooks();
+
+        // Sort the books by rating in descending order and limit to top 5
+        List<Book> topRatedBooks = books.stream()
+                .sorted(Comparator.comparingInt(Book::getRating).reversed())
+                .limit(5)
+                .collect(Collectors.toList());
+
+        // Extract the titles (or any other information you want to display) of the top rated books
+        List<String> topRatedBooksTitles = topRatedBooks.stream()
+                .map(book -> book.getTitle() + " - Rating: " + book.getRating())
+                .collect(Collectors.toList());
+
+        // Display the titles in the ListView
+        topRatedBooksListView.setItems(FXCollections.observableArrayList(topRatedBooksTitles));
     }
 }

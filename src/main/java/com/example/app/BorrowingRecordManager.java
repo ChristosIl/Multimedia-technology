@@ -130,6 +130,11 @@ public class BorrowingRecordManager {
         borrowingRecords.removeIf(record -> record.getUserIdNumber().equals(userId));
         saveBorrowingRecords();
     }
+
+    public void deleteRecordsByBookIsbn(String isbn) {
+        borrowingRecords.removeIf(record -> record.getBookIsbn().equals(isbn));
+        saveBorrowingRecords();
+    }
 }
 
 

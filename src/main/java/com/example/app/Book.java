@@ -1,6 +1,8 @@
 package com.example.app;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Book implements Serializable {
     private static final long serialVersionUID = 1L; //needs for serialization
@@ -15,7 +17,7 @@ public class Book implements Serializable {
     private int yearOfPublishing;
     private String category;
     private int numberOfCopies;
-
+    private List<Integer> ratings;
     // Constructor
     public Book(String title, String author, String publishingHouse, String isbn, int yearOfPublishing, String category, int numberOfCopies) {
         this.title = title;
@@ -25,6 +27,7 @@ public class Book implements Serializable {
         this.yearOfPublishing = yearOfPublishing;
         this.category = category;
         this.numberOfCopies = numberOfCopies;
+        this.ratings = new ArrayList<>();
     }
 
     // Setters
@@ -54,9 +57,7 @@ public class Book implements Serializable {
     }
 
     // Getters
-    public float getAverageRating() {
-        return averageRating;
-    }
+
     public int getRating() {
         return rating;
     }
@@ -86,5 +87,24 @@ public class Book implements Serializable {
 
     public int getNumberOfCopies() {
         return numberOfCopies;
+    }
+
+    public List<Integer> getRatings() {
+        return ratings;
+    }
+
+    public double getAverageRating() {
+        if (ratings == null || ratings.isEmpty()) {
+            return 0.0;
+        }
+        double total = ratings.stream().mapToInt(Integer::intValue).sum();
+        return total / ratings.size();
+    }
+
+    public void addRating(int rating) {
+        if (ratings == null) {
+            ratings = new ArrayList<>(); // Initialize if null
+        }
+        ratings.add(rating);
     }
 }

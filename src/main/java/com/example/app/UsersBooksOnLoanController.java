@@ -159,7 +159,7 @@ public class UsersBooksOnLoanController {
         // Assuming BookManager can access and update books by ISBN
         Book book = BookManager.getInstance().getBookByIsbn(record.getBookIsbn());
         if (book != null) {
-            book.setRating(rating); // Assuming setRating(int rating) updates the book's rating
+            book.addRating(rating); // Assuming addRating(int rating) updates the book's rating
             BookManager.getInstance().saveBooks(); // Assuming saveBooks() method exists to persist changes
         }
     }

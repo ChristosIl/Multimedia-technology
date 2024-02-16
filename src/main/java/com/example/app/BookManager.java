@@ -3,6 +3,7 @@ package com.example.app;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookManager {
     private static BookManager instance; //Singleton instance
@@ -11,6 +12,14 @@ public class BookManager {
 
     public BookManager() {
         books = loadBooks();
+    }
+
+    public List<Book> getTopRatedBooks(int limit) {
+        return books.stream()
+                .filter(book -> book.getAverageRating() > 0) // Ensure the book has been rated
+                .sorted((b1, b2) -> Double.compare(b2.getAverageRating(), b1.getAverageRating()))
+                .limit(limit)
+                .collect(Collectors.toList());
     }
 
     //Public method to get the singleton instance

@@ -132,18 +132,19 @@ public class HelloController {
     private void displayTopRatedBooks() {
         List<Book> books = BookManager.getInstance().getBooks();
 
-        // Sort the books by rating in descending order and limit to top 5
+        // Sort the books by their average rating in descending order and limit to top 5
         List<Book> topRatedBooks = books.stream()
-                .sorted(Comparator.comparingInt(Book::getRating).reversed())
+                .sorted((book1, book2) -> Double.compare(book2.getAverageRating(), book1.getAverageRating()))
                 .limit(5)
                 .collect(Collectors.toList());
 
-        // Extract the titles (or any other information you want to display) of the top rated books
-        List<String> topRatedBooksTitles = topRatedBooks.stream()
-                .map(book -> book.getTitle() + " - Rating: " + book.getRating())
+        // Extract the titles and average ratings of the top-rated books
+        List<String> topRatedBooksInfo = topRatedBooks.stream()
+                .map(book -> book.getTitle() + " - Average Rating: " + String.format("%.2f", book.getAverageRating()))
                 .collect(Collectors.toList());
 
-        // Display the titles in the ListView
-        topRatedBooksListView.setItems(FXCollections.observableArrayList(topRatedBooksTitles));
+        // Display the titles and ratings in the ListView
+        topRatedBooksListView.setItems(FXCollections.observableArrayList(topRatedBooksInfo));
     }
+
 }

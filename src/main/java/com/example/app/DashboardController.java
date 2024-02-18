@@ -84,7 +84,8 @@ public class DashboardController {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete Book");
         MenuItem editItem = new MenuItem("Edit");
-        contextMenu.getItems().addAll(deleteItem, editItem);
+        MenuItem commentItem = new MenuItem("View Comments and Rating");
+        contextMenu.getItems().addAll(deleteItem, editItem, commentItem);
 
         //Action for delete context menu
         deleteItem.setOnAction(event -> {
@@ -110,6 +111,13 @@ public class DashboardController {
                             .otherwise(contextMenu)
             );
             return row;
+        });
+
+        commentItem.setOnAction(event -> {
+            Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                showBookDetails(selectedBook);
+            }
         });
     }
 
@@ -147,6 +155,22 @@ public class DashboardController {
         }
     }
 
+    @FXML
+    private void handleCategoriesManagement() throws IOException{
+        try {
+            //Load the sign-up page FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesManagement.fxml"));
+            Parent root = loader.load();
+
+            //Get the current window (stage) from any component, here using the username TextField
+            Stage stage = (Stage) booksTable.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the exception
+        }
+    }
 
     @FXML
     private void handleLogoutAction() throws IOException {
@@ -175,9 +199,25 @@ public class DashboardController {
     }
 
     private void deleteBook(Book book) {
+        book.clearComments();
         // Correctly calling deleteBook on BookManager's instance
         BookManager.getInstance().deleteBook(book);
         // Refresh the TableView with the updated list
         booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
+    }
+
+    private void showBookDetails(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminsBookDetails.fxml"));
+            Parent root = loader.load();
+
+            AdminsBookDetailsController controller = loader.getController();
+            controller.setBook(book);
+
+            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            currentScene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

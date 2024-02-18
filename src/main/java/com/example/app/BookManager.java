@@ -31,6 +31,8 @@ public class BookManager {
     }
 
     public void addBook(Book book) {
+        Category category = CategoryManager.getInstance().findOrCreateCategory(book.getCategory().getName());
+        book.setCategory(category);
         books.add(book);
         saveBooks();
     }
@@ -116,6 +118,23 @@ public class BookManager {
         return null; // Book not found
     }
 
+    public void updateBookCategory(String oldCategory, String newCategory) {
+        for (Book book : books) {
+            if (book.getCategory().getName().equalsIgnoreCase(oldCategory)) {
+                book.setCategory(new Category(newCategory)); // Assuming Category reference in Book
+            }
+        }
+        // Optionally, save changes
+    }
 
+    public int getBookCountByCategory(String categoryName) {
+        int count = 0;
+        for (Book book : books) {
+            if (book.getCategory() != null && book.getCategory().getName().equalsIgnoreCase(categoryName)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
 }

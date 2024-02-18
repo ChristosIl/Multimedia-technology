@@ -20,7 +20,6 @@
     <Button fx:id="logoutButton" layoutX="14.0" layoutY="349.0" onAction="#handleLogoutAction" prefHeight="42.0" prefWidth="84.0" text="Logout" />
    <MenuBar fx:id="MenuBar" accessibleRole="BUTTON" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
      <menus>
-       <Menu fx:id="File" mnemonicParsing="false" text="File" />
        <Menu fx:id="UsersButton" mnemonicParsing="false" text="Users">
             <items>
                <MenuItem fx:id="seetheusersButton" mnemonicParsing="false" onAction="#handleSeeUsersAction" text="See the list of users" />
@@ -31,6 +30,11 @@
                 <MenuItem fx:id="seethelistButton" mnemonicParsing="false" onAction="#handleSeeTheListAction" text="see the list of the books" />
                <MenuItem fx:id="seetheloanlistButton" mnemonicParsing="false" onAction="#handleseeborrowedbookslist" text="see the loan list" />
             </items></Menu>
+       <Menu fx:id="CategoriesButton" mnemonicParsing="false" text="Categories">
+            <items>
+               <MenuItem fx:id="CategoriesManagementButton" mnemonicParsing="false" onAction="#handleCategoriesManagement" text="Categories Management" />
+            </items>
+         </Menu>
      </menus>
    </MenuBar>
    <TableView fx:id="booksTable" layoutX="75.0" layoutY="121.0" managed="false" prefHeight="200.0" prefWidth="451.0" visible="false">

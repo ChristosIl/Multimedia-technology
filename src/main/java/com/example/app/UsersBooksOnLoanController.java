@@ -1,13 +1,16 @@
 package com.example.app;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -81,6 +84,7 @@ public class UsersBooksOnLoanController {
             ContextMenu rowMenu = new ContextMenu();
             MenuItem returnItem = new MenuItem("Return this book");
             MenuItem rateMenuItem = new MenuItem("Rate this book");
+            MenuItem commentItem = new MenuItem("Comment on this book");
 
 
             returnItem.setOnAction(event -> {
@@ -99,7 +103,14 @@ public class UsersBooksOnLoanController {
                 }
             });
 
-            rowMenu.getItems().addAll(returnItem, rateMenuItem);
+            commentItem.setOnAction(event -> {
+                BorrowingRecord selectedRecord = row.getItem();
+                if (selectedRecord != null) {
+                    showCommentDialog(selectedRecord);
+                }
+            });
+
+            rowMenu.getItems().addAll(returnItem, rateMenuItem, commentItem);
 
             // Only display context menu for non-null items.
             row.contextMenuProperty().bind(
@@ -152,6 +163,7 @@ public class UsersBooksOnLoanController {
         result.ifPresent(rating -> {
             System.out.println("Rating: " + rating); // For debugging
             updateBookRating(record, rating);
+
         });
     }
 
@@ -162,6 +174,41 @@ public class UsersBooksOnLoanController {
             book.addRating(rating); // Assuming addRating(int rating) updates the book's rating
             BookManager.getInstance().saveBooks(); // Assuming saveBooks() method exists to persist changes
         }
+    }
+
+    private void showCommentDialog(BorrowingRecord record) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Comment on Book");
+
+        // Setup the input area for the comment
+        TextArea textArea = new TextArea();
+        textArea.setPromptText("Enter your comment here");
+        textArea.setPrefHeight(100); // Adjust based on your preference
+
+        // Set the dialog's content
+        dialog.getDialogPane().setContent(textArea);
+
+        // Add buttons to the dialog
+        ButtonType submitButton = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(submitButton, ButtonType.CANCEL);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == submitButton) {
+                return textArea.getText();
+            }
+            return null;
+        });
+
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(comment -> {
+            // Assuming Book has a method to add comments
+            Book book = BookManager.getInstance().getBookByIsbn(record.getBookIsbn());
+            if (book != null) {
+                book.addComment(currentUser.getUsername() + ": " + comment);
+                // Make sure to save or update the book information accordingly
+                BookManager.getInstance().saveBooks(); // or any method you have to persist the changes
+            }
+        });
     }
 
 }

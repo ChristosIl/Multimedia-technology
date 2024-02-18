@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserDashboardController {
@@ -46,11 +47,9 @@ public class UserDashboardController {
         //borrow context menu
         ContextMenu contextMenu = new ContextMenu();
         MenuItem borrowItem = new MenuItem("Borrow this book");
-        contextMenu.getItems().addAll(borrowItem );
+        MenuItem viewCommentsItem = new MenuItem("View Comments and Rating");
+        contextMenu.getItems().addAll(borrowItem, viewCommentsItem);
 
-        borrowItem.setOnAction(event -> {
-
-        });
 
         booksTable.setRowFactory(tv -> {
             TableRow<Book> row = new TableRow<>();
@@ -68,6 +67,13 @@ public class UserDashboardController {
                 borrowBook(selectedBook);
             }
             booksTable.refresh();
+        });
+
+        viewCommentsItem.setOnAction(event -> {
+            Book selectedBook = (Book) booksTable.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                showBookDetails(selectedBook);
+            }
         });
 
     }
@@ -189,5 +195,20 @@ public class UserDashboardController {
         }
     }
 
+    private void showBookDetails(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookDetails.fxml"));
+            Parent root = loader.load();
+
+            BookDetailsController controller = loader.getController();
+            controller.setBook(book);
+            controller.setCurrentUser(currentUser);
+
+            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            currentScene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

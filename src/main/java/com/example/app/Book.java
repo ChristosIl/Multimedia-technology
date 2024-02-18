@@ -15,11 +15,12 @@ public class Book implements Serializable {
     private String publishingHouse;
     private String isbn;
     private int yearOfPublishing;
-    private String category;
+    private Category category;
     private int numberOfCopies;
     private List<Integer> ratings;
+    private List<String> comments;
     // Constructor
-    public Book(String title, String author, String publishingHouse, String isbn, int yearOfPublishing, String category, int numberOfCopies) {
+    public Book(String title, String author, String publishingHouse, String isbn, int yearOfPublishing, Category category, int numberOfCopies) {
         this.title = title;
         this.author = author;
         this.publishingHouse = publishingHouse;
@@ -28,6 +29,7 @@ public class Book implements Serializable {
         this.category = category;
         this.numberOfCopies = numberOfCopies;
         this.ratings = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     // Setters
@@ -49,7 +51,7 @@ public class Book implements Serializable {
     public void setYearOfPublishing(int yearOfPublishing) {
         this.yearOfPublishing = yearOfPublishing;
     }
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     public void setNumberOfCopies(int numberOfCopies) {
@@ -81,7 +83,7 @@ public class Book implements Serializable {
         return yearOfPublishing;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -107,4 +109,26 @@ public class Book implements Serializable {
         }
         ratings.add(rating);
     }
+
+    public void addComment(String comment) {
+        if (this.comments == null) {
+            this.comments = new ArrayList<>();
+        }
+        this.comments.add(comment);
+    }
+
+    public List<String> getComments() {
+        if (this.comments == null) {
+            this.comments = new ArrayList<>();
+        }
+        return this.comments;
+    }
+
+    public void clearComments() {
+        if (this.comments != null) {
+            this.comments.clear();
+        }
+    }
+
+
 }

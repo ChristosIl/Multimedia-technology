@@ -27,7 +27,7 @@ public class AddBookController {
         String title = titleField.getText();
         String author = authorField.getText();
         String isbn = isbnField.getText();
-        String category = categoryField.getText();
+        String categoryName = categoryField.getText();
         String yearStr = yearOfPublishingField.getText();
         String copiesStr = numberOfCopiesField.getText();
 
@@ -39,6 +39,9 @@ public class AddBookController {
         int yearOfPublishing = Integer.parseInt(yearStr);
         int numberOfCopies = Integer.parseInt(copiesStr);
 
+        CategoryManager categoryManager = CategoryManager.getInstance(); // Assuming a singleton pattern
+        Category category = categoryManager.findOrCreateCategory(categoryName);
+        categoryManager.saveCategories();
         // Check for existing book by ISBN using BookManager
         if (bookManager.getBooks().stream().anyMatch(book -> book.getIsbn().equals(isbn))) {
             messageLabel.setText("The book already exists.");

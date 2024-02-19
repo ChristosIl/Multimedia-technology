@@ -95,12 +95,12 @@ public class DashboardController {
             }
         });
         //Action for Edit context menu
-       /* editItem.setOnAction(event -> {
+        editItem.setOnAction(event -> {
             Book selectedBook = booksTable.getSelectionModel().getSelectedItem();
             if (selectedBook != null) {
                 showEditBookForm(selectedBook);
             }
-        });*/
+        });
 
         //Attach the context menu to the table rows
         booksTable.setRowFactory(tv -> {
@@ -220,4 +220,22 @@ public class DashboardController {
             e.printStackTrace();
         }
     }
+
+    private void showEditBookForm(Book book) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EditBookForm.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller and set the book
+            EditBookFormController controller = loader.getController();
+            controller.setBook(book);
+
+            // Set the edit book form as the root of the current scene
+            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            currentScene.setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

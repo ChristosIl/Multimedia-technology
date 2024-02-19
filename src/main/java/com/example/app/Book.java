@@ -130,5 +130,9 @@ public class Book implements Serializable {
         }
     }
 
-
+    public int howManyRatings(){
+        if(ratings == null || ratings.isEmpty()){
+            return 0;
+        } else return ratings.size();
+    }
 }

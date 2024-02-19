@@ -84,9 +84,20 @@ public class BookManager {
     }
 
     //TODO
-    public void deleteBooksByCategory(String category) {
-        books.removeIf(book -> book.getCategory().equals(category));
+    public void deleteBooksByCategory(String categoryName) {
+        System.out.println("Finding books in category: " + categoryName);
+        List<Book> booksToRemove = books.stream()
+                .filter(book -> book.getCategory().getName().equals(categoryName))
+                .collect(Collectors.toList());
+        System.out.println("Books to remove: " + booksToRemove.size());
+        // Iterate over the list of books to remove
+        for (Book book : booksToRemove) {
+            System.out.println("Deleting book: " + book.getIsbn());
+            deleteBook(book);
+        }
+
         saveBooks();
+
     }
 
     public void decreaseBookCopies(String isbn) {
@@ -124,7 +135,7 @@ public class BookManager {
                 book.setCategory(new Category(newCategory)); // Assuming Category reference in Book
             }
         }
-        // Optionally, save changes
+        saveBooks();
     }
 
     public int getBookCountByCategory(String categoryName) {

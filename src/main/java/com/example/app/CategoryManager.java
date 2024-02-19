@@ -28,10 +28,13 @@ public class CategoryManager {
     }
 
     public void deleteCategory(String name) {
+        System.out.println("Attempting to delete category: " + name);
         if (categories.removeIf(category -> category.getName().equals(name))) {
             saveCategories(); // Save after deleting
+            System.out.println("Category deleted: " + name);
         }
         BookManager.getInstance().deleteBooksByCategory(name);
+        System.out.println("Attempting to delete books in category: " + name);
     }
 
     public void editCategory(String oldName, String newName) {
@@ -46,6 +49,7 @@ public class CategoryManager {
         if (found) {
             // Update all books that belonged to the old category to the new category name
             BookManager.getInstance().updateBookCategory(oldName, newName);
+            saveCategories();
         }
         // Optionally, save changes to persistent storage
     }

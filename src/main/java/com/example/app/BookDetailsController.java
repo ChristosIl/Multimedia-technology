@@ -48,7 +48,7 @@ public class BookDetailsController {
     public void setBook(Book book) {
         this.book = book;
         titleLabel.setText(book.getTitle());
-        ratingLabel.setText("Average Rating: " + String.format("%.2f", book.getAverageRating()));
+        ratingLabel.setText("Average Rating: " + String.format("%.2f", book.getAverageRating()) + "( " + book.howManyRatings() + " )");
 
         // Clear existing comments from the VBox
         commentsVBox.getChildren().clear();

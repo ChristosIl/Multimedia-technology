@@ -106,7 +106,7 @@ public class Book implements Serializable {
 
     public void addRating(int rating) {
         if (ratings == null) {
-            ratings = new ArrayList<>(); // Initialize if null
+            ratings = new ArrayList<>(); //Initialize if null
         }
         ratings.add(rating);
     }

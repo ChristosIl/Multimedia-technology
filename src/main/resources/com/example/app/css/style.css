@@ -1,0 +1,88 @@
+/* style.css */
+.root {
+    -fx-background-color: #e5c0c0;
+}
+
+.label {
+    -fx-font-family: 'Bell MT';
+    -fx-text-fill: #2a2a2a;
+    -fx-font-size: 50px;
+}
+/*Error Labels*/
+.errorLabel1{
+    -fx-font-family: 'Bell MT';
+    -fx-text-fill: #ff0000;
+    -fx-font-size: 14px;
+}
+/*Sign up button*/
+.button-SignUp {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 5px 5px;
+    -fx-font-family: "Bell MT";
+}
+.button-SignUp:hover {
+    -fx-background-color: #007bff; /* Blue background */
+    -fx-text-fill: white; /* White text */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 5); /* Shadow effect */
+}
+.button-Login{
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-family: "Bell MT";
+    -fx-font-size: 18;
+}
+.button-Login:hover {
+    -fx-background-color: #007bff; /* Blue background */
+    -fx-text-fill: white; /* White text */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 5); /* Shadow effect */
+}
+
+
+.text-Username{
+    -fx-font-family: "Bell MT";
+    -fx-color-label-visible: #ff0000;
+    -fx-font-size: 25px;
+}
+.text-Password{
+    -fx-padding: 0px 0px ;
+    -fx-font-family: "Bell MT";
+    -fx-color-label-visible: #ff0000;
+    -fx-font-size: 25px;
+}
+
+.text-field, .password-field {
+    -fx-font-size: 14px;
+    -fx-border-color: #c0c0c0;
+}
+
+.list-view {
+    -fx-border-color: #000000;
+    -fx-border-radius: 10;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-background-insets: 10;
+    -fx-background-radius: 10;
+}
+.list-view .scroll-bar:vertical, .list-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10px;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: #007bff;
+    -fx-background-insets: 2, 2, 2;
+    -fx-background-radius: 10px;
+}
+.list-view .scroll-bar .increment-button .increment-arrow,
+.list-view .scroll-bar .decrement-button .decrement-arrow {
+    -fx-shape: " "; /* Remove arrow shape */
+}

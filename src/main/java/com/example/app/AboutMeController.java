@@ -31,7 +31,7 @@ public class AboutMeController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("ratings")); // Ensure 'rating' matches the getter in Book class, e.g., getRating
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("ratings")); 
 
         populateRatingTableView();
     }

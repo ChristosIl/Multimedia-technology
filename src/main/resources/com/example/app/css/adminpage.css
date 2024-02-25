@@ -1,0 +1,147 @@
+.root {
+    -fx-background-color: #e5c0c0; /* Soft pink background for the application */
+}
+
+.table-view {
+    -fx-background-color: #2a2a2a; /* Dark background for the table */
+    -fx-border-color: black; /* Black border around the table */
+    -fx-border-width: 2px; /* Border width */
+}
+
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 6px; /* Adjust the preferred width for vertical scroll bars */
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-height: 6px; /* Adjust the preferred height for horizontal scroll bars */
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: white; /* Vibrant color for the thumb */
+    -fx-background-insets: 0, 0, 0; /* Adjust padding around the thumb if necessary */
+    -fx-background-radius: 2em; /* Adjust for a more subtle rounded effect if desired */
+}
+
+.table-view .scroll-bar .track {
+    -fx-background-color: #444444; /* Darker shade for the track */
+    -fx-background-radius: 2em;
+}
+
+.table-view .scroll-bar .increment-button,
+.table-view .scroll-bar .decrement-button {
+    -fx-background-color: #2a2a2a; /* Hide buttons by matching the table background */
+    -fx-min-height: 0; /* Minimize button height */
+    -fx-min-width: 0; /* Minimize button width */
+    -fx-background-radius: 2em;
+}
+
+.table-view .scroll-bar .increment-button .increment-arrow,
+.table-view .scroll-bar .decrement-button .decrement-arrow {
+    -fx-shape: " "; /* Remove arrow shape */
+}
+
+
+.table-view .column-header-background {
+    -fx-background-color: #2a2a2a; /* Slightly lighter shade for the header */
+    -fx-text-fill: white; /* White text for headers */
+}
+
+.table-view .table-cell {
+    -fx-text-fill: white; /* White text for cells for better readability */
+    -fx-border-color: white; /* Lighter borders for cells */
+    -fx-border-width: 0.2px; /* Thinner borders */
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #2a2a2a; /* Matching the table background */
+    -fx-table-cell-border-color: #555555; /* Consistent cell border color */
+    -fx-selection-bar: white; /* Color when a row is selected */
+    -fx-selection-bar-non-focused: white; /* Color when the table is not focused */
+}
+
+/* Style for column headers */
+.table-view .column-header, .table-view .nested-column-header {
+    -fx-background-color: #444444; /* Matching column header background */
+    -fx-border-color: black;
+    -fx-text-fill: white; /* White text for headers */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white; /* Ensures text within column headers is white */
+}
+
+/* Style for the MenuBar */
+.menu-bar {
+    -fx-background-color: #ffffff; /* Dark gray background */
+    -fx-padding: 3px; /* Add some padding around the MenuBar */
+}
+
+/* Style for the Menu */
+.menu-bar .menu {
+    -fx-background-color: transparent; /* Transparent background for menus */
+    -fx-text-fill: white; /* White text color for menu text */
+}
+
+/* Style for the Menu text */
+.menu-bar .menu .label {
+    -fx-text-fill: black; /* Ensure menu labels are also white */
+}
+
+/* Style for Menu items */
+.menu-bar .menu .menu-item {
+    -fx-background-color: white; /* Slightly lighter gray for menu items */
+    -fx-text-fill: black; /* White text for menu items */
+}
+
+.menu-bar .menu .menu-item:focused {
+    -fx-background-color: #007bff /* Highlight color when focused */
+}
+
+.menu-bar .menu .menu-item:pressed, .menu-bar .menu .menu-item:selected {
+    -fx-background-color: #007bff /* Different shade when pressed or selected */
+}
+
+/* Style for the Logout button */
+.button-logout {
+    -fx-background-color: white; /* White background */
+    -fx-text-fill: black; /* Black text */
+
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners for the background */
+    -fx-padding: 5px 20px; /* Padding around the text */
+}
+
+/* Style for the Logout button when hovered */
+.button-logout:hover {
+    -fx-background-color: #007bff; /* Blue background */
+    -fx-text-fill: white; /* White text */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 5); /* Shadow effect */
+}
+
+
+/* Style for the context menu */
+.context-menu {
+    -fx-background-color: #ffffff; /* White background for the context menu */
+}
+
+/* Style for the menu items in the context menu */
+.context-menu .menu-item {
+    -fx-background-color: white; /* White background for each menu item */
+    -fx-text-fill: black; /* Black text color */
+}
+
+/* Style for the menu items when hovered */
+.context-menu .menu-item:focused,
+.context-menu .menu-item:hover {
+    -fx-background-color: rgba(67, 0, 255, 0.5); /* Light blue background when hovered */
+    -fx-text-fill: white; /* White text color when hovered */
+}
+
+/* Optional: Style for the menu items when pressed or selected */
+.context-menu .menu-item:pressed,
+.context-menu .menu-item:selected {
+    -fx-background-color: #3700B3; /* Darker shade of blue when pressed or selected */
+    -fx-text-fill: white; /* White text color */
+}

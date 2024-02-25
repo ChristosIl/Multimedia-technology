@@ -32,7 +32,7 @@
      </columns>
    </TableView>
    <TextField fx:id="searchField" layoutX="262.0" layoutY="91.0" prefHeight="25.0" prefWidth="264.0" />
-   <MenuBar fx:id="MenuBar" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+   <MenuBar fx:id="MenuBar" layoutY="0.0" prefHeight="25.0" prefWidth="600.0">
      <menus>
        <Menu fx:id="Rating" mnemonicParsing="false" text="AboutMe">
             <items>

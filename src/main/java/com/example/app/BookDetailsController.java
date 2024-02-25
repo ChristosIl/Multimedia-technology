@@ -44,18 +44,17 @@ public class BookDetailsController {
 
 
 
-    // Method to initialize the book details
+    //initializing book details
     public void setBook(Book book) {
         this.book = book;
         titleLabel.setText(book.getTitle());
         authorLabel.setText("Author: " +book.getAuthor());
-        ratingLabel.setText("Average Rating: " + String.format("%.2f\n", book.getAverageRating()) + "Total Raitings" + "("+ book.howManyRatings() +")");
+        ratingLabel.setText("Average Rating: " + String.format("%.2f\n", book.getAverageRating()) + "Total Raitings: " + " "+ book.howManyRatings() );
 
-        // Clear existing comments from the VBox
         commentsVBox.getChildren().clear();
         commentsVBox.setSpacing(10);
 
-        // Dynamically add each comment as a label to the VBox
+        //Dynamically add each comment as a label to the VBox
         for (String comment : book.getComments()) { // Assuming getComments() returns List<String>
             Label commentLabel = new Label(comment);
             commentLabel.setWrapText(true); // Allow line wrapping

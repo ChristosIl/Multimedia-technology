@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Comparator;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 
 
 public class HelloController {
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private TextField username;
     @FXML
@@ -31,6 +34,12 @@ public class HelloController {
     @FXML
     public void initialize() {
         displayTopRatedBooks();
+        loadCss();
+    }
+
+    private void loadCss() {
+        String css = this.getClass().getResource("/com/example/app/css/style.css").toExternalForm();
+        rootPane.getStylesheets().add(css);
     }
     @FXML
     protected void handleLoginAction() throws IOException {

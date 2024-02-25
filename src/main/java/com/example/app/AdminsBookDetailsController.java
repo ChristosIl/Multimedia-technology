@@ -40,7 +40,7 @@ public class AdminsBookDetailsController {
 
 
 
-    // Method to initialize the book details
+    //initializing books
     public void setBook(Book book) {
         this.book = book;
         titleLabel.setText(book.getTitle());

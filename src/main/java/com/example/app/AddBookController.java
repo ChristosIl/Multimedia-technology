@@ -21,7 +21,7 @@ public class AddBookController {
     @FXML
     private Button goBackButton;
 
-    private BookManager bookManager = BookManager.getInstance(); // Assuming a singleton pattern
+    private BookManager bookManager = BookManager.getInstance(); //singleton pattern
 
     @FXML
     private void handleAddBookAction(ActionEvent event) {
@@ -40,17 +40,17 @@ public class AddBookController {
         int yearOfPublishing = Integer.parseInt(yearStr);
         int numberOfCopies = Integer.parseInt(copiesStr);
 
-        CategoryManager categoryManager = CategoryManager.getInstance(); // Assuming a singleton pattern
+        CategoryManager categoryManager = CategoryManager.getInstance(); //singleton pattern
         Category category = categoryManager.findOrCreateCategory(categoryName);
         categoryManager.saveCategories();
-        // Check for existing book by ISBN using BookManager
+        //Checking existing books by ISBN
         if (bookManager.getBooks().stream().anyMatch(book -> book.getIsbn().equals(isbn))) {
             messageLabel.setText("The book already exists.");
             return;
         }
 
         Book newBook = new Book(title, author, publisher , isbn, yearOfPublishing, category, numberOfCopies);
-        bookManager.addBook(newBook); // Add book through BookManager
+        bookManager.addBook(newBook); //adding the book to the list of books
 
         if (bookListener != null) {
             bookListener.onBookUpdated();
@@ -80,11 +80,11 @@ public class AddBookController {
         publisherField.clear();
     }
 
-    // Handler for the "Go Back" button
+    //"Go Back" button handler
     @FXML
     private void handleGoBackAction(ActionEvent event) {
         Stage stage = (Stage) goBackButton.getScene().getWindow();
-        stage.close(); // Close the current window, assuming you have other mechanisms to go back
+        stage.close();
     }
 
     public void setBookListener(BookListener listener) {

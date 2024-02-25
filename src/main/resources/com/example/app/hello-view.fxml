@@ -9,30 +9,36 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.HelloController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.HelloController">
    <children>
-      <Label layoutX="56.0" layoutY="101.0" prefHeight="34.0" prefWidth="112.0" text="Username:">
+      <Label fx:id="usernameLabel" layoutX="56.0" layoutY="109.0" prefHeight="34.0" prefWidth="112.0" text="Username:" styleClass="text-Username">
          <font>
-            <Font size="23.0" />
+            <Font name="Bell MT" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="177.0" prefHeight="34.0" prefWidth="112.0" text="Password:">
-         <font>
-            <Font size="23.0" />
-         </font>
+      <Label fx:id="passwordLabel" layoutX="56.0" layoutY="185.0" prefHeight="34.0" prefWidth="112.0" text="Password:" styleClass="text-Password">
       </Label>
-      <TextField fx:id="username" layoutX="55.0" layoutY="142.0" prefHeight="25.0" prefWidth="289.0" />
+      <TextField fx:id="username" layoutX="55.0" layoutY="142.0" prefHeight="25.0" prefWidth="289.0"  />
       <PasswordField fx:id="password" layoutX="55.0" layoutY="217.0" prefHeight="25.0" prefWidth="289.0" />
-      <Button fx:id="LogIn" layoutX="162.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleLoginAction" prefHeight="34.0" prefWidth="75.0" text="Log In" />
-      <Text layoutX="199.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="201.25">
+      <Button fx:id="LogIn" layoutX="162.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleLoginAction" prefHeight="34.0" prefWidth="75.0" text="Log In" styleClass="button-Login"/>
+      <Text layoutX="55.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="201.25">
          <font>
-            <Font size="38.0" />
+            <Font name="Bell MT" size="38.0" />
          </font>
       </Text>
-      <Label fx:id="errorLabel" layoutX="55.0" layoutY="246.0" prefHeight="17.0" prefWidth="289.0" textFill="red" />
-      <Text layoutX="56.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't you have an account? Sign up here" wrappingWidth="230.13671875" />
-      <Button fx:id="SignUp" layoutX="286.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleSignUpAction" text="Sign Up" />
-      <Label fx:id="errorLabel_2" layoutX="55.0" layoutY="169.0" prefHeight="17.0" prefWidth="289.0" textFill="red" />
-      <ListView fx:id="topRatedBooksListView" layoutX="370.0" layoutY="86.0" prefHeight="274.0" prefWidth="200.0" />
+      <Label fx:id="errorLabel" layoutX="55.0" layoutY="246.0" prefHeight="17.0" prefWidth="289.0" textFill="#800000"
+             styleClass="errorLabel1" />
+      <Text layoutX="50.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Don't you have an account? Sign up here" wrappingWidth="236.13671875">
+         <font>
+            <Font name="Bell MT" size="14.0" />
+         </font></Text>
+      <Button fx:id="SignUp" layoutX="286.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleSignUpAction" text="Sign Up" styleClass="button-SignUp" />
+      <Label fx:id="errorLabel_2" layoutX="55.0" layoutY="169.0" prefHeight="17.0" prefWidth="289.0" styleClass="errorLabel1" />
+      <ListView fx:id="topRatedBooksListView" layoutX="370.0" layoutY="86.0" prefHeight="274.0" prefWidth="200.0" styleClass="list-view"/>
+      <Text layoutX="370.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top Rated Books" wrappingWidth="200.0">
+         <font>
+            <Font name="Bell MT" size="28.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -83,7 +83,6 @@ public class BookManager {
         BorrowingRecordManager.getInstance().deleteRecordsByBookIsbn(book.getIsbn());
     }
 
-    //TODO
     public void deleteBooksByCategory(String categoryName) {
         System.out.println("Finding books in category: " + categoryName);
         List<Book> booksToRemove = books.stream()
@@ -126,7 +125,8 @@ public class BookManager {
                 return book;
             }
         }
-        return null; // Book not found
+        //Book not found
+        return null;
     }
 
     public void updateBookCategory(String oldCategory, String newCategory) {
@@ -149,23 +149,20 @@ public class BookManager {
     }
 
     public void updateBook(Book updatedBook) {
-        // Attempt to find the book in the list using its ISBN
+        //trying to find the book by its isbn
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
             if (book.getIsbn().equals(updatedBook.getIsbn())) {
-                // If found, update the book's details
+                //if found we update the book's details
                 book.setTitle(updatedBook.getTitle());
                 book.setAuthor(updatedBook.getAuthor());
                 book.setYearOfPublishing(updatedBook.getYearOfPublishing());
                 book.setNumberOfCopies(updatedBook.getNumberOfCopies());
                 book.setCategory(updatedBook.getCategory());
-                // Since we found the book and updated it, we can save the books list and exit
                 saveBooks();
                 return;
             }
         }
-        // Optional: handle the case where the book is not found, such as adding the book to the list or notifying the user
-
     }
 
     public boolean isbnExists(String isbn, String excludeIsbn) {

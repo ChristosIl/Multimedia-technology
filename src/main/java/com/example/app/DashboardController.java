@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import javafx.scene.control.TableView;
 
 public class DashboardController implements BookListener{
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private Label welcomeLabel; // Reference to the welcome label
     @FXML
@@ -47,6 +50,7 @@ public class DashboardController implements BookListener{
 
     @Override
     public void onBookUpdated() {
+        loadCss();
         booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
     }
     //see the list of books
@@ -78,6 +82,7 @@ public class DashboardController implements BookListener{
 
     @FXML
     public void initialize() {
+        loadCss();
         //Set up the CellValueFactory for each TableColumn
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
@@ -130,6 +135,10 @@ public class DashboardController implements BookListener{
         });
     }
 
+    private void loadCss() {
+        String css = this.getClass().getResource("/com/example/app/css/adminpage.css").toExternalForm();
+        rootPane.getStylesheets().add(css);
+    }
     @FXML
     private void handleAddNewBookAction() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddBookForm.fxml"));

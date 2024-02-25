@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.DashboardController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.DashboardController">
     <Label fx:id="welcomeLabel" layoutX="184.0" layoutY="34.0" prefHeight="66.0" prefWidth="233.0" text="Admin Page">
       <font>
          <Font name="Bell MT" size="45.0" />
       </font></Label>
 
 
-    <Button fx:id="logoutButton" layoutX="14.0" layoutY="349.0" onAction="#handleLogoutAction" prefHeight="42.0" prefWidth="84.0" text="Logout" />
-   <MenuBar fx:id="MenuBar" accessibleRole="BUTTON" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+    <Button fx:id="logoutButton" layoutX="14.0" layoutY="349.0" onAction="#handleLogoutAction" prefHeight="42.0" prefWidth="84.0" text="Logout" styleClass="button-logout" />
+   <MenuBar fx:id="MenuBar" accessibleRole="BUTTON" layoutY="0.0" prefHeight="25.0" prefWidth="600.0">
      <menus>
        <Menu fx:id="UsersButton" mnemonicParsing="false" text="Users">
             <items>
@@ -37,9 +37,9 @@
          </Menu>
      </menus>
    </MenuBar>
-   <TableView fx:id="booksTable" layoutX="39.0" layoutY="107.0" managed="true" prefHeight="218.0" prefWidth="523.0" visible="true">
+   <TableView fx:id="booksTable" layoutX="39.0" layoutY="107.0" managed="true" prefHeight="218.0" prefWidth="527.0" visible="true" styleClass="table-view">
      <columns>
-       <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />
+       <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title"  />
        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="author" />
          <TableColumn fx:id="publisherColumn" prefWidth="75.0" text="publisher" />
          <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="isbn" />

@@ -9,8 +9,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.CategoriesManagementController">
    <children>
-      <Button fx:id="GoBackButton" layoutX="14.0" layoutY="341.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="38.0" prefWidth="80.0" text="Go Back" />
-      <Text layoutX="218.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories Management" wrappingWidth="163.13671875" />
+      <Button fx:id="GoBackButton" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="42.0" prefWidth="84.0" text="Go Back" />
+      <Text layoutX="169.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categories Management" wrappingWidth="263.0">
+         <font>
+            <Font name="Bell MT" size="26.0" />
+         </font></Text>
       <TableView fx:id="categoriesTable" layoutX="169.0" layoutY="106.0" prefHeight="200.0" prefWidth="263.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="262.0" text="Category Name" />

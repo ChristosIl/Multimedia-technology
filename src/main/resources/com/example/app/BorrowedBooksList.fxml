@@ -9,9 +9,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.BorrowedBooksListController">
    <children>
-      <Text layoutX="191.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="list of loans" wrappingWidth="235.2578125">
+      <Text layoutX="192.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="list of loans" wrappingWidth="215.2578125">
          <font>
-            <Font size="43.0" />
+            <Font name="Bell MT" size="45.0" />
          </font>
       </Text>
       <Button fx:id="GoBackButton" layoutX="14.0" layoutY="349.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="42.0" prefWidth="84.0" text="Go Back" />

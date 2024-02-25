@@ -12,6 +12,7 @@ public class Book implements Serializable {
     //book's data
     private String title;
     private String author;
+    private String publisher;
     private String publishingHouse;
     private String isbn;
     private int yearOfPublishing;

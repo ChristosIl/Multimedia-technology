@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.DashboardController">
-    <Label fx:id="welcomeLabel" layoutX="176.0" layoutY="41.0" prefHeight="50.0" prefWidth="232.0" text="Admin Page!">
+    <Label fx:id="welcomeLabel" layoutX="184.0" layoutY="34.0" prefHeight="66.0" prefWidth="233.0" text="Admin Page">
       <font>
-         <Font size="45.0" />
+         <Font name="Bell MT" size="45.0" />
       </font></Label>
 
 
@@ -24,11 +24,11 @@
             <items>
                <MenuItem fx:id="seetheusersButton" mnemonicParsing="false" onAction="#handleSeeUsersAction" text="See the list of users" />
             </items></Menu>
-       <Menu fx:id="BookButton" mnemonicParsing="false" text="books">
+       <Menu fx:id="BookButton" mnemonicParsing="false" text="Books">
             <items>
-               <MenuItem fx:id="addnewbookButton" mnemonicParsing="false" onAction="#handleAddNewBookAction" text="add new book" />
-                <MenuItem fx:id="seethelistButton" mnemonicParsing="false" onAction="#handleSeeTheListAction" text="see the list of the books" />
-               <MenuItem fx:id="seetheloanlistButton" mnemonicParsing="false" onAction="#handleseeborrowedbookslist" text="see the loan list" />
+               <MenuItem fx:id="addnewbookButton" mnemonicParsing="false" onAction="#handleAddNewBookAction" text="Add new book" />
+                <MenuItem fx:id="seethelistButton" mnemonicParsing="false" onAction="#handleSeeTheListAction" text="see the list of the books" visible="false" />
+               <MenuItem fx:id="seetheloanlistButton" mnemonicParsing="false" onAction="#handleseeborrowedbookslist" text="See the loan list" />
             </items></Menu>
        <Menu fx:id="CategoriesButton" mnemonicParsing="false" text="Categories">
             <items>
@@ -37,10 +37,11 @@
          </Menu>
      </menus>
    </MenuBar>
-   <TableView fx:id="booksTable" layoutX="75.0" layoutY="121.0" managed="false" prefHeight="200.0" prefWidth="451.0" visible="false">
+   <TableView fx:id="booksTable" layoutX="39.0" layoutY="107.0" managed="true" prefHeight="218.0" prefWidth="523.0" visible="true">
      <columns>
        <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />
        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="author" />
+         <TableColumn fx:id="publisherColumn" prefWidth="75.0" text="publisher" />
          <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="isbn" />
          <TableColumn fx:id="yearofpublishingColumn" prefWidth="75.0" text="year of publishing" />
          <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="category" />

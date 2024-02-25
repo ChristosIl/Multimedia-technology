@@ -7,7 +7,7 @@ import java.util.List;
 public class CategoryManager {
     private List<Category> categories;
     private static CategoryManager instance;
-    private static final String CATEGORIES_FILE = "categories.ser";
+    private static final String CATEGORIES_FILE ="medialab"+ File.separator +"categories.ser";
 
     private CategoryManager() {this.categories = loadCategories();}
 

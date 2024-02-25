@@ -9,7 +9,7 @@ public class BorrowingRecordManager {
 
     private static BorrowingRecordManager instance; //Singleton instance
     private List<BorrowingRecord> borrowingRecords; //list of borrowing books
-    private static final String BORROWED_BOOKS_FILE = "borrowedbooks.ser";
+    private static final String BORROWED_BOOKS_FILE = "medialab"+ File.separator +"borrowedbooks.ser";
 
     public BorrowingRecordManager() { borrowingRecords = loadBorrowingRecords(); }
 

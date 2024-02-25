@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserDataManager {
 
-    private static final String USERS_FILE = "users.ser";
+    private static final String USERS_FILE = "medialab"+ File.separator +"users.ser";
     private static UserDataManager instance;
     private List<User> users;
 

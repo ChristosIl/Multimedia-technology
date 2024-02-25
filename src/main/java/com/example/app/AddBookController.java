@@ -12,9 +12,10 @@ import java.io.*;
 
 
 public class AddBookController {
+    private BookListener bookListener;
 
     @FXML
-    private TextField titleField, authorField, isbnField, yearOfPublishingField, categoryField, numberOfCopiesField;
+    private TextField titleField, authorField, isbnField, yearOfPublishingField, categoryField, numberOfCopiesField,publisherField;
     @FXML
     private Label messageLabel;
     @FXML
@@ -30,7 +31,7 @@ public class AddBookController {
         String categoryName = categoryField.getText();
         String yearStr = yearOfPublishingField.getText();
         String copiesStr = numberOfCopiesField.getText();
-
+        String publisher = publisherField.getText();
         if (!validateInput(yearStr, copiesStr)) {
             messageLabel.setText("Invalid input. Please enter integers for year and copies.");
             return;
@@ -48,11 +49,16 @@ public class AddBookController {
             return;
         }
 
-        Book newBook = new Book(title, author, "", isbn, yearOfPublishing, category, numberOfCopies);
+        Book newBook = new Book(title, author, publisher , isbn, yearOfPublishing, category, numberOfCopies);
         bookManager.addBook(newBook); // Add book through BookManager
 
+        if (bookListener != null) {
+            bookListener.onBookUpdated();
+        }
         messageLabel.setText("Book added successfully.");
         clearForm();
+
+
     }
 
     private boolean validateInput(String year, String copies) {
@@ -71,6 +77,7 @@ public class AddBookController {
         yearOfPublishingField.clear();
         categoryField.clear();
         numberOfCopiesField.clear();
+        publisherField.clear();
     }
 
     // Handler for the "Go Back" button
@@ -78,5 +85,9 @@ public class AddBookController {
     private void handleGoBackAction(ActionEvent event) {
         Stage stage = (Stage) goBackButton.getScene().getWindow();
         stage.close(); // Close the current window, assuming you have other mechanisms to go back
+    }
+
+    public void setBookListener(BookListener listener) {
+        this.bookListener = listener;
     }
 }

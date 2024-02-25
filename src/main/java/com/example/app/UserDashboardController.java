@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class UserDashboardController {
@@ -25,7 +24,7 @@ public class UserDashboardController {
     @FXML
     private TableView booksTable;
     @FXML
-    private TableColumn<Book, String> titleColumn, authorColumn, isbnColumn, yearOfPublishingColumn, categoryColumn, numberOfCopiesColumn;
+    private TableColumn<Book, String> titleColumn, authorColumn, isbnColumn, yearOfPublishingColumn, categoryColumn, numberOfCopiesColumn, publisherColumn ;
     @FXML
     private TextField searchField;
     private User currentUser;
@@ -37,7 +36,7 @@ public class UserDashboardController {
         yearOfPublishingColumn.setCellValueFactory(new PropertyValueFactory<>("yearOfPublishing"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         numberOfCopiesColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfCopies"));
-
+        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publishingHouse"));
         //put books on the table
         populateTableView();
 
@@ -156,13 +155,22 @@ public class UserDashboardController {
     private void borrowBook(Book selectedBook) {
         int activeBorrowings = BorrowingRecordManager.getInstance().countActiveBorrowingsForUser(currentUser.getIdNumber());
         if (activeBorrowings >= 2) {
-            //TODO show him a message in the app
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Borrowing Limit Reached");
+            alert.setHeaderText(null);
+            alert.setContentText("You have reached the limit of 2 borrowed books.");
+            alert.showAndWait();
             System.out.println("You have reached the limit of 2 borrowed books.");
             return;
         }
 
         if (selectedBook.getNumberOfCopies() <= 0) {
-            //TODO implement this message to be displayed inside the app
+            Alert alert = new Alert(Alert.AlertType.INFORMATION); // Use INFORMATION or WARNING based on your preference
+            alert.setTitle("Book Unavailable");
+            alert.setHeaderText(null); // You can set this to something specific or leave it null to have no header
+            alert.setContentText("There are no copies of the book available.");
+
+            alert.showAndWait();
             System.out.println("There are no copies of the book available.");
         } else {
             //Decrease book copies and update the list
@@ -179,10 +187,10 @@ public class UserDashboardController {
     private void handleBooksratingslist()throws IOException{
         try {
             //Load the sign-up page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RaitingList.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AboutMe.fxml"));
             Parent root = loader.load();
 
-            RaitingListController controller = loader.getController();
+            AboutMeController controller = loader.getController();
             controller.setCurrentUser(currentUser);
 
             //Get the current window (stage) from any component, here using the username TextField

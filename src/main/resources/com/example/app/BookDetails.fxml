@@ -16,7 +16,7 @@
             <Font name="Bell MT" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="ratingLabel" layoutX="367.0" layoutY="10.0" prefHeight="56.0" prefWidth="207.0" text="Average Rating">
+      <Label fx:id="ratingLabel" layoutX="418.0" layoutY="22.0" prefHeight="66.0" prefWidth="176.0" text="Average Rating(ratings)">
          <font>
             <Font name="Bell MT" size="17.0" />
          </font>
@@ -31,5 +31,10 @@
             <Font name="Bell MT" size="17.0" />
          </font>
       </Text>
+      <Label fx:id="authorLabel" layoutX="16.0" layoutY="66.0" prefHeight="22.0" prefWidth="262.0" text="Label">
+         <font>
+            <Font name="Bell MT" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

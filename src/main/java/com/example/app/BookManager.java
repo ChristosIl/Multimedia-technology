@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class BookManager {
     private static BookManager instance; //Singleton instance
     private List<Book> books;
-    private static final String BOOKS_FILE = "books.ser";
+    private static final String BOOKS_FILE = "medialab" + File.separator + "books.ser";
 
     public BookManager() {
         books = loadBooks();
@@ -146,6 +146,31 @@ public class BookManager {
             }
         }
         return count;
+    }
+
+    public void updateBook(Book updatedBook) {
+        // Attempt to find the book in the list using its ISBN
+        for (int i = 0; i < books.size(); i++) {
+            Book book = books.get(i);
+            if (book.getIsbn().equals(updatedBook.getIsbn())) {
+                // If found, update the book's details
+                book.setTitle(updatedBook.getTitle());
+                book.setAuthor(updatedBook.getAuthor());
+                book.setYearOfPublishing(updatedBook.getYearOfPublishing());
+                book.setNumberOfCopies(updatedBook.getNumberOfCopies());
+                book.setCategory(updatedBook.getCategory());
+                // Since we found the book and updated it, we can save the books list and exit
+                saveBooks();
+                return;
+            }
+        }
+        // Optional: handle the case where the book is not found, such as adding the book to the list or notifying the user
+
+    }
+
+    public boolean isbnExists(String isbn, String excludeIsbn) {
+        return books.stream()
+                .anyMatch(book -> book.getIsbn().equals(isbn) && !book.getIsbn().equals(excludeIsbn));
     }
 
 }

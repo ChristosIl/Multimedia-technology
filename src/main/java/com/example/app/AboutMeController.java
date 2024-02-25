@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RaitingListController {
+public class AboutMeController {
 
     @FXML
     private Button GoBackButton;

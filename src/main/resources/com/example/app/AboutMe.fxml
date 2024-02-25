@@ -7,15 +7,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.RaitingListController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.AboutMeController">
    <children>
       <Text layoutX="176.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RATING LIST" wrappingWidth="247.13671875">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Button fx:id="GoBackButton" layoutX="14.0" layoutY="348.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="38.0" prefWidth="69.0" text="Go Back" />
+      <Button fx:id="GoBackButton" layoutX="14.0" layoutY="348.0" mnemonicParsing="false" onAction="#handlegobackAction" prefHeight="42.0" prefWidth="84.0" text="Go Back" />
       <TableView fx:id="ratingTableView" layoutX="150.0" layoutY="100.0" prefHeight="200.0" prefWidth="299.0">
         <columns>
           <TableColumn fx:id="titleColumn" prefWidth="75.0" text="title" />

@@ -10,12 +10,15 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.binding.Bindings;
+import javafx.scene.control.TableView;
 
-public class DashboardController {
+public class DashboardController implements BookListener{
 
     @FXML
     private Label welcomeLabel; // Reference to the welcome label
@@ -35,11 +38,17 @@ public class DashboardController {
     private TableColumn<Book, String> categoryColumn;
     @FXML
     private TableColumn<Book, String> copiesColumn;
+    @FXML
+    private TableColumn<Book, String> publisherColumn;
     // Method to update the welcome text
     public void setWelcomeText(String text) {
         welcomeLabel.setText(text);
     }
 
+    @Override
+    public void onBookUpdated() {
+        booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
+    }
     //see the list of books
     @FXML
     private void handleSeeTheListAction() {
@@ -76,7 +85,7 @@ public class DashboardController {
         yearofpublishingColumn.setCellValueFactory(new PropertyValueFactory<>("yearOfPublishing"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         copiesColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfCopies"));
-
+        publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publishingHouse"));
         //load the books
         booksTable.setItems(loadBooks());
 
@@ -125,6 +134,9 @@ public class DashboardController {
     private void handleAddNewBookAction() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddBookForm.fxml"));
         Parent root = loader.load();
+
+        AddBookController addBookController = loader.getController();
+        addBookController.setBookListener(this);
 
         // Create a new scene with the loaded page
         Scene scene = new Scene(root);
@@ -199,12 +211,28 @@ public class DashboardController {
     }
 
     private void deleteBook(Book book) {
-        book.clearComments();
-        // Correctly calling deleteBook on BookManager's instance
-        BookManager.getInstance().deleteBook(book);
-        // Refresh the TableView with the updated list
-        booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
-    }
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirm Deletion");
+        confirmAlert.setHeaderText("Delete Book");
+        confirmAlert.setContentText("Are you sure you want to delete this book?");
+
+        ButtonType buttonTypeDelete = new ButtonType("Delete", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmAlert.getButtonTypes().setAll(buttonTypeDelete, buttonTypeCancel);
+
+        //dialog display
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+
+        if(result.isPresent() && result.get() == buttonTypeDelete){
+            //clearing all comments
+            book.clearComments();
+            //calling deleteBook on BookManager's instance
+            BookManager.getInstance().deleteBook(book);
+            //Refresh the TableView
+            booksTable.setItems(FXCollections.observableArrayList(BookManager.getInstance().getBooks()));
+        }
+
+         }
 
     private void showBookDetails(Book book) {
         try {
@@ -213,8 +241,7 @@ public class DashboardController {
 
             AdminsBookDetailsController controller = loader.getController();
             controller.setBook(book);
-
-            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            Scene currentScene = booksTable.getScene();
             currentScene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
@@ -226,12 +253,11 @@ public class DashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EditBookForm.fxml"));
             Parent root = loader.load();
 
-            // Get the controller and set the book
+            //Get the controller and set the book
             EditBookFormController controller = loader.getController();
             controller.setBook(book);
-
-            // Set the edit book form as the root of the current scene
-            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            //edit book form -> root of the current scene
+            Scene currentScene = booksTable.getScene();
             currentScene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

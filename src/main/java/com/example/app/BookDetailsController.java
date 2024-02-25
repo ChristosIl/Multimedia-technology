@@ -18,7 +18,7 @@ public class BookDetailsController {
     @FXML
     private Button GoBackButton;
     @FXML
-    private Label titleLabel;
+    private Label titleLabel, authorLabel;
     @FXML
     private ListView<String> commentsListView;
     @FXML
@@ -48,7 +48,8 @@ public class BookDetailsController {
     public void setBook(Book book) {
         this.book = book;
         titleLabel.setText(book.getTitle());
-        ratingLabel.setText("Average Rating: " + String.format("%.2f", book.getAverageRating()) + "( " + book.howManyRatings() + " )");
+        authorLabel.setText("Author: " +book.getAuthor());
+        ratingLabel.setText("Average Rating: " + String.format("%.2f\n", book.getAverageRating()) + "Total Raitings" + "("+ book.howManyRatings() +")");
 
         // Clear existing comments from the VBox
         commentsVBox.getChildren().clear();

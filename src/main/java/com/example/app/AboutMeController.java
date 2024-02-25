@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class AboutMeController {
+    //TODO: FIX THE ABOUT ME PAGE
 
     @FXML
     private Button GoBackButton;
@@ -31,7 +32,7 @@ public class AboutMeController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("ratings")); 
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("ratings"));
 
         populateRatingTableView();
     }

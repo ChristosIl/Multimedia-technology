@@ -35,7 +35,6 @@ public class BorrowedBooksListController {
     }
     @FXML
     private void handlegobackAction() throws IOException {
-        // Load the login page FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
         Parent root = loader.load();
 
@@ -96,18 +95,11 @@ public class BorrowedBooksListController {
     }
 
     private void terminateLoan(BorrowingRecord record) {
-        // Call removeRecord or returnBook method here
         BorrowingRecordManager.getInstance().removeRecord(record.getUserIdNumber(), record.getBookIsbn());
-        // You might want to call a method to increase the number of book copies in `BookManager` if applicable
         //BookManager.getInstance().increaseBookCopies(record.getBookIsbn());
-        populateTableView(); // Refresh the TableView with the updated list
+        populateTableView(); //Refresh the TableView with the updated list
     }
 
-    private void refreshTableView() {
-        // Implement a method that refreshes the TableView with the updated list of records
-        List<BorrowingRecord> updatedRecords = BorrowingRecordManager.getInstance().getBorrowingRecords();
-        tableView.setItems(FXCollections.observableArrayList(updatedRecords));
-    }
 
     private boolean showConfirmationDialog(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

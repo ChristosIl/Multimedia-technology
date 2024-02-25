@@ -54,10 +54,10 @@ public class HelloController {
         if (usernameText.isEmpty() || passwordText.isEmpty()) {
             // Display message prompting the user to fill in all fields
             if (usernameText.isEmpty()) {
-                errorLabel_2.setText("You must fill up this field");
+                errorLabel_2.setText("You must fill in this field");
             }
             if (passwordText.isEmpty()) {
-                errorLabel.setText("You must fill up this field");
+                errorLabel.setText("You must fill in this field");
             }
         } else {
             List<User> users = UserDataManager.getInstance().getUsers(); // Adjusted to use getInstance().getUsers()

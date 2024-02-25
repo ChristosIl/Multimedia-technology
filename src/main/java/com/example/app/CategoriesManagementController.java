@@ -45,12 +45,12 @@ public class CategoriesManagementController {
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(name -> {
             if (!name.trim().isEmpty() && CategoryManager.getInstance().getCategories().stream().noneMatch(c -> c.getName().equalsIgnoreCase(name.trim()))) {
-                // Create the new category
+                //create new category
                 Category newCategory = new Category(name.trim());
                 CategoryManager.getInstance().addCategory(newCategory.getName());
                 refreshTableView();
             } else {
-                // Handle the case where the category name is invalid or already exists
+                //Invalid category or already exists
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Invalid or duplicate category name.", ButtonType.OK);
                 alert.showAndWait();
             }
@@ -69,7 +69,7 @@ public class CategoriesManagementController {
                 if (categoryName == null || empty) {
                     setText(null);
                 } else {
-                    // Assuming CategoryManager has a method to count books by category name
+                    //count the books that belong to a specific category
                     int bookCount = BookManager.getInstance().getBookCountByCategory(categoryName);
                     setText(categoryName + " (" + bookCount + ")");
                 }
@@ -84,14 +84,12 @@ public class CategoriesManagementController {
             MenuItem editItem = new MenuItem("Edit");
             editItem.setOnAction(event -> {
                 Category selectedCategory = row.getItem();
-                // Implement your method to show dialog and update category name
                 showEditDialog(selectedCategory);
             });
 
             MenuItem deleteItem = new MenuItem("Delete");
             deleteItem.setOnAction(event -> {
                 Category selectedCategory = row.getItem();
-                // Implement your method to delete the category
                 categoryManager.deleteCategory(selectedCategory.getName());
                 observableCategories.remove(selectedCategory);
                 refreshTableView();
@@ -99,7 +97,7 @@ public class CategoriesManagementController {
 
             contextMenu.getItems().addAll(editItem, deleteItem);
 
-            // Only display context menu for non-null items
+            //Only display context menu for non-null items
             row.contextMenuProperty().bind(
                     javafx.beans.binding.Bindings.when(javafx.beans.binding.Bindings.isNotNull(row.itemProperty()))
                             .then(contextMenu)
@@ -115,13 +113,13 @@ public class CategoriesManagementController {
         dialog.setHeaderText("Change Category Name");
         dialog.setContentText("Please enter the new category name:");
 
-        // Traditional way to get the response value.
+
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(newName -> {
-            // Check if the new name is not empty, not the same as the old one, and not already used
+            //We check if the new name is not empty, not the same as the old one, and not already used
             if (!newName.trim().isEmpty() && !category.getName().equalsIgnoreCase(newName.trim()) &&
                     CategoryManager.getInstance().getCategories().stream().noneMatch(c -> c.getName().equalsIgnoreCase(newName.trim()))) {
-                // Update the category's name
+               //update
                 CategoryManager.getInstance().editCategory(category.getName(), newName.trim());
                 refreshTableView();
             }

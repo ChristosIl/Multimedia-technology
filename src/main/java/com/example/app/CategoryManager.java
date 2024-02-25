@@ -22,15 +22,15 @@ public class CategoryManager {
         if (categories.stream().noneMatch(category -> category.getName().equalsIgnoreCase(name))) {
             categories.add(new Category(name));
             saveCategories();
-            return true; // Indicate success
+            return true;
         }
-        return false; // Category already exists
+        return false; //Category already exists
     }
 
     public void deleteCategory(String name) {
         System.out.println("Attempting to delete category: " + name);
         if (categories.removeIf(category -> category.getName().equals(name))) {
-            saveCategories(); // Save after deleting
+            saveCategories();
             System.out.println("Category deleted: " + name);
         }
         BookManager.getInstance().deleteBooksByCategory(name);
@@ -47,11 +47,10 @@ public class CategoryManager {
             }
         }
         if (found) {
-            // Update all books that belonged to the old category to the new category name
+            //Update all books that belonged to the old category to the new category name
             BookManager.getInstance().updateBookCategory(oldName, newName);
             saveCategories();
         }
-        // Optionally, save changes to persistent storage
     }
 
     public List<Category> getCategories() {
@@ -82,12 +81,13 @@ public class CategoryManager {
         File file = new File(CATEGORIES_FILE);
         if (file.exists()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-                return (List<Category>) ois.readObject(); // Deserialize the entire list
+                return (List<Category>) ois.readObject(); //deserialize the whoel list
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
-        return new ArrayList<>(); // Return an empty list if the file doesn't exist or an error occurs
+        //Return an empty list if the file doesn't exist or an error occurs
+        return new ArrayList<>();
     }
     public Category findOrCreateCategory(String name) {
         for (Category category : categories) {
@@ -95,7 +95,7 @@ public class CategoryManager {
                 return category;
             }
         }
-        // If not found, create a new category and add it to the list
+        //If a category wasn't found, create a new category and add it to the list
         Category newCategory = new Category(name);
         categories.add(newCategory);
         return newCategory;

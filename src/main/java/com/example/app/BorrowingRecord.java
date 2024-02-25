@@ -10,12 +10,13 @@ public class BorrowingRecord implements Serializable{
     private LocalDate returnDate;
     private String title;
     private String author;
+
     //constructor
     public BorrowingRecord(String userIdNumber, String bookIsbn, LocalDate borrowDate, String title, String author) {
         this.userIdNumber = userIdNumber;
         this.bookIsbn = bookIsbn;
         this.borrowDate = borrowDate;
-        this.returnDate = borrowDate.plusDays(5); // Assuming a fixed borrowing period of 5 days
+        this.returnDate = borrowDate.plusDays(5); //borrowing period + 5 days
         this.title = title;
         this.author = author;
     }

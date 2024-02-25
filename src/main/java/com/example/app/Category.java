@@ -13,7 +13,7 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    // Getter and Setter
+    //Getter and Setter
     public String getName() {
         return name;
     }
@@ -22,8 +22,9 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    //This will return the category name when the object is printed.
     @Override
     public String toString() {
-        return name; // This will return the category name when the object is printed.
+        return name;
     }
 }

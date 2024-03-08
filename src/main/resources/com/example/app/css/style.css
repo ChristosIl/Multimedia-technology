@@ -24,8 +24,8 @@
     -fx-font-family: "Bell MT";
 }
 .button-SignUp:hover {
-    -fx-background-color: #007bff; /* Blue background */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 5); /* Shadow effect */
 }
 .button-Login{
@@ -37,8 +37,8 @@
     -fx-font-size: 18;
 }
 .button-Login:hover {
-    -fx-background-color: #007bff; /* Blue background */
-    -fx-text-fill: white; /* White text */
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0, 0, 5); /* Shadow effect */
 }
 

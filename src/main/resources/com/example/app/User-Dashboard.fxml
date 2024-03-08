@@ -34,9 +34,9 @@
    <TextField fx:id="searchField" layoutX="262.0" layoutY="91.0" prefHeight="25.0" prefWidth="264.0" />
    <MenuBar fx:id="MenuBar" layoutY="0.0" prefHeight="25.0" prefWidth="600.0">
      <menus>
-       <Menu fx:id="Rating" mnemonicParsing="false" text="AboutMe">
+       <Menu fx:id="AboutMe" mnemonicParsing="false" text="AboutMe">
             <items>
-               <MenuItem fx:id="RatingList" mnemonicParsing="false" onAction="#handleBooksratingslist" text="User's informations" />
+               <MenuItem fx:id="Usersinformations" mnemonicParsing="false" onAction="#handleAboutMe" text="User's informations" />
             </items></Menu>
          <Menu fx:id="Bookonloan" mnemonicParsing="false" text="Books on loan">
              <items>

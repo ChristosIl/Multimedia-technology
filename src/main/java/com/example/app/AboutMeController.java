@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -21,21 +22,9 @@ public class AboutMeController {
     private Button GoBackButton;
     private User currentUser;
     @FXML
-    private TableView<Book> ratingTableView;
-    @FXML
-    private TableColumn<Book, String> titleColumn, authorColumn, isbnColumn;
-    @FXML
-    private TableColumn<Book, Integer> ratingColumn;
+    private TextField username, idnumberField, nameField, emailField, surnameField;
 
-    @FXML
-    public void initialize() {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-        isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("ratings"));
 
-        populateRatingTableView();
-    }
     @FXML
     private void handlegobackAction() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("User-Dashboard.fxml"));
@@ -53,10 +42,18 @@ public class AboutMeController {
 
     public void setCurrentUser(User user) {
         this.currentUser = user;
+        updateTextFields();
     }
 
-    private void populateRatingTableView() {
-        ObservableList<Book> books = FXCollections.observableArrayList(BookManager.getInstance().getBooks());
-        ratingTableView.setItems(books);
+    public void updateTextFields(){
+        if(currentUser != null ){
+            username.setText(currentUser.getUsername());
+            idnumberField.setText(currentUser.getIdNumber());
+            nameField.setText(currentUser.getName());
+            emailField.setText(currentUser.getEmail());
+            surnameField.setText(currentUser.getSurname());
+        }
     }
+
+
 }

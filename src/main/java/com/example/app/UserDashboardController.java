@@ -184,7 +184,7 @@ public class UserDashboardController {
     }
 
     @FXML
-    private void handleBooksratingslist()throws IOException{
+    private void handleAboutMe()throws IOException{
         try {
             //Load the sign-up page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AboutMe.fxml"));

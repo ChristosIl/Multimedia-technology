@@ -33,7 +33,7 @@ public class MainApplication extends Application {
         // Print list of books to console
         bookManager.printBooks();
 
-        // Test category serialization
+
         // testCategorySerialization();
 
         //CategoryManager categoryManager = CategoryManager.getInstance();
@@ -46,25 +46,25 @@ public class MainApplication extends Application {
         stage.show();
     }
 
-    private void testCategorySerialization() {
-        // Obtain the singleton instance of CategoryManager
+    private void testcategoryserialization() {
+        //singleton for CategoryMan
         CategoryManager categoryManager = CategoryManager.getInstance();
 
-        // Add a test category and save categories to file
-        categoryManager.addCategory("Test Category");
-        categoryManager.saveCategories(); // Serialize categories to file
-        System.out.println("Categories after adding and saving:");
-        categoryManager.printCategories(); // Print categories to console
 
-        // Clear the categories list to simulate app restart
-        categoryManager.clearCategories(); // Clear the list in memory
+        categoryManager.addCategory("Test Category");
+        categoryManager.saveCategories();
+        System.out.println("Categories after adding and saving:");
+        categoryManager.printCategories();
+
+        //simulate app restart
+        categoryManager.clearCategories();
         System.out.println("Categories after clearing:");
         categoryManager.printCategories(); // Should print nothing
 
-        // Load categories from the file
-        categoryManager.loadCategories(); // Reload categories from the file
+
+        categoryManager.loadCategories();
         System.out.println("Categories after reloading:");
-        categoryManager.printCategories(); // Should print "Test Category"
+        categoryManager.printCategories(); //Should print "Test Category"
     }
     public static void main(String[] args) {
         launch();

@@ -50,7 +50,7 @@ public class UserDataManager {
         if (!userFile.exists()) {
             // Directly modify the instance's users list
             this.users.clear(); // Ensure it's empty before initialization
-            this.users.add(new User("admin", "admin")); // Add admin user directly to the instance's list
+            this.users.add(new User("medialab", "medialab_2024")); // Add admin user directly to the instance's list
             saveUserList(); // Save the updated list without needing to pass it as an argument
         }
     }

@@ -64,7 +64,7 @@ public class MainController {
             User loggedInUser = null;
 
             // Admin check (assuming admin has a special handling)
-            if (usernameText.equalsIgnoreCase("admin") && passwordText.equals("admin")) {
+            if (usernameText.equalsIgnoreCase("medialab") && passwordText.equals("medialab_2024")) {
                 // Open admin dashboard
                 loadDashboard("Dashboard.fxml");
                 System.out.println("Login successfully!");

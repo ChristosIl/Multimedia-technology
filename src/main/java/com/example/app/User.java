@@ -12,7 +12,7 @@ public class User implements Serializable {
     private String idNumber;
     private String email;
 
-    // Constructor for regular users
+    //Constructor for regular users
     public User(String username, String password, String name, String surname, String idNumber, String email) {
         this.username = username;
         this.password = password;
@@ -22,7 +22,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    //Constructor for admin user
+    //Constructor for admin user (it is not needed, but we implemented for future updates maybe)
     public User(String username, String password) {
         this(username, password, "", "", "", "");
     }
@@ -52,7 +52,7 @@ public class User implements Serializable {
         return email;
     }
 
-    //SETTERS
+    //Setters
     public void setUsername(String username) {
         this.username = username;
     }

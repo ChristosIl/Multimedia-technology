@@ -74,7 +74,7 @@ public class DashboardController implements BookListener{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserList.fxml"));
         Parent root = loader.load();
         Stage stage = new Stage();
-        stage.setTitle("User List");
+        stage.setTitle("Users List");
         stage.setScene(new Scene(root));
         stage.initModality(Modality.NONE); //non modal window
         stage.showAndWait();
@@ -149,13 +149,11 @@ public class DashboardController implements BookListener{
 
         // Create a new scene with the loaded page
         Scene scene = new Scene(root);
-
         // Create a new stage for the popup
         Stage stage = new Stage();
         stage.setTitle("Add New Book");
         stage.setScene(scene);
-
-        // Show the new stage
+        //Show the new stage
         stage.show();
     }
 
@@ -166,13 +164,13 @@ public class DashboardController implements BookListener{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BorrowedBooksList.fxml"));
             Parent root = loader.load();
 
-            //Get the current window (stage) from any component, here using the username TextField
+            //Get the current window (stage) from any component(here i chose the username TextField)
             Stage stage = (Stage) booksTable.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         }
     }
 
@@ -182,27 +180,24 @@ public class DashboardController implements BookListener{
             //Load the sign-up page FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriesManagement.fxml"));
             Parent root = loader.load();
-
-            //Get the current window (stage) from any component, here using the username TextField
+            //Get the current window (stage) from any component(here i chose the username TextField)
             Stage stage = (Stage) booksTable.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         }
     }
 
     @FXML
     private void handleLogoutAction() throws IOException {
-        // Load the login page FXML
+        //Load the login page FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = loader.load();
-
-        // Get the current window (stage) from the welcome label
+        //Get the current window (stage) from the welcome label
         Stage stage = (Stage) welcomeLabel.getScene().getWindow();
-
-        // Set the login scene to the stage
+        //Set the login scene to the stage
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -210,11 +205,11 @@ public class DashboardController implements BookListener{
 
     //loadbooks
     private ObservableList<Book> loadBooks() {
-        // Access the singleton instance of BookManager
+        //Access the singleton instance of BookManager
         BookManager bookManager = BookManager.getInstance();
-
         // Convert the List<Book> to ObservableList<Book> for use with TableView
         ObservableList<Book> observableBooks = FXCollections.observableArrayList(bookManager.getBooks());
+
 
         return observableBooks;
     }
@@ -262,7 +257,7 @@ public class DashboardController implements BookListener{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EditBookForm.fxml"));
             Parent root = loader.load();
 
-            //Get the controller and set the book
+            //Get the controller and set the book (passing the book we chose to edit)
             EditBookFormController controller = loader.getController();
             controller.setBook(book);
             //edit book form -> root of the current scene

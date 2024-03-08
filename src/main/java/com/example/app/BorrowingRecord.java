@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class BorrowingRecord implements Serializable{
-    private static final long serialVersionUID = 4L;
+    private static final long serialVersionUID = 1L;
     private String userIdNumber;
     private String bookIsbn;
     private LocalDate borrowDate;

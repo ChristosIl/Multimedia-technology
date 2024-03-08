@@ -33,6 +33,7 @@ public class UsersBooksOnLoanController {
 
     @FXML
     public void initialize(){
+        //Calling functions for needed initializations
         setupColumnValueFactories();
         populateTableView();
         setupContextMenu();
@@ -54,6 +55,7 @@ public class UsersBooksOnLoanController {
     }
 
     private void setupColumnValueFactories() {
+        //Pass the needed info to the cells
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("bookIsbn"));
@@ -71,11 +73,11 @@ public class UsersBooksOnLoanController {
 
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
-        populateTableView(); // Call this here to refresh the table view based on the user ID
+        populateTableView();
     }
 
     private void setupContextMenu() {
-        // Create the context menu and return option
+        //Context menu
         ContextMenu contextMenu = new ContextMenu();
 
 
@@ -112,7 +114,7 @@ public class UsersBooksOnLoanController {
 
             rowMenu.getItems().addAll(returnItem, rateMenuItem, commentItem);
 
-            // Only display context menu for non-null items.
+            //Only display context menu for non-null items.
             row.contextMenuProperty().bind(
                     Bindings.when(Bindings.isNotNull(row.itemProperty()))
                             .then(rowMenu)
@@ -124,9 +126,9 @@ public class UsersBooksOnLoanController {
 
     private void returnBook(BorrowingRecord record) {
         BorrowingRecordManager.getInstance().returnBook(currentUser.getIdNumber(), record.getBookIsbn());
-        populateTableView(); // Refresh the list of borrowed books
+        populateTableView();
 
-        // Show confirmation dialog
+        //Show confirmation dialog
         Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
         confirmationAlert.setTitle("Return Confirmation");
         confirmationAlert.setHeaderText(null);
@@ -135,22 +137,22 @@ public class UsersBooksOnLoanController {
     }
 
     private void showRatingDialog(BorrowingRecord record) {
-        // Create a custom dialog
+        //Custom dialog
         Dialog<Integer> dialog = new Dialog<>();
         dialog.setTitle("Rate This Book");
         dialog.setHeaderText("Select your rating for the book");
 
-        // Set the button types.
+        //Buttons set up
         ButtonType rateButtonType = new ButtonType("Rate", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(rateButtonType, ButtonType.CANCEL);
 
-        // Create a ChoiceBox for ratings
+        //ChoiceBox for ratings
         ChoiceBox<Integer> ratingChoiceBox = new ChoiceBox<>(FXCollections.observableArrayList(1, 2, 3, 4, 5));
-        ratingChoiceBox.setValue(5); // Default to highest rating
+        ratingChoiceBox.setValue(5); //We set the highest value for default value
 
         dialog.getDialogPane().setContent(ratingChoiceBox);
 
-        // Convert the result to a rating when the rate button is clicked.
+        //Convert the result to a rating when the rate button is clicked.
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == rateButtonType) {
                 return ratingChoiceBox.getValue();
@@ -161,18 +163,18 @@ public class UsersBooksOnLoanController {
         Optional<Integer> result = dialog.showAndWait();
 
         result.ifPresent(rating -> {
-            System.out.println("Rating: " + rating); // For debugging
+            System.out.println("Rating: " + rating); //debugging
             updateBookRating(record, rating);
 
         });
     }
 
     private void updateBookRating(BorrowingRecord record, int rating) {
-        // Assuming BookManager can access and update books by ISBN
+        //Access and update books by ISBN
         Book book = BookManager.getInstance().getBookByIsbn(record.getBookIsbn());
         if (book != null) {
-            book.addRating(rating); // Assuming addRating(int rating) updates the book's rating
-            BookManager.getInstance().saveBooks(); // Assuming saveBooks() method exists to persist changes
+            book.addRating(rating); //Update the book's rating
+            BookManager.getInstance().saveBooks(); //saving changes
         }
     }
 
@@ -180,15 +182,15 @@ public class UsersBooksOnLoanController {
         Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Comment on Book");
 
-        // Setup the input area for the comment
+        //Setup the input area for the comment
         TextArea textArea = new TextArea();
         textArea.setPromptText("Enter your comment here");
-        textArea.setPrefHeight(100); // Adjust based on your preference
+        textArea.setPrefHeight(200);  //dimensions
 
-        // Set the dialog's content
+        //Set the dialog's content
         dialog.getDialogPane().setContent(textArea);
 
-        // Add buttons to the dialog
+        //Buttons
         ButtonType submitButton = new ButtonType("Submit", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(submitButton, ButtonType.CANCEL);
 
@@ -201,12 +203,11 @@ public class UsersBooksOnLoanController {
 
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(comment -> {
-            // Assuming Book has a method to add comments
+            //Add comments
             Book book = BookManager.getInstance().getBookByIsbn(record.getBookIsbn());
             if (book != null) {
                 book.addComment(currentUser.getUsername() + ": " + comment);
-                // Make sure to save or update the book information accordingly
-                BookManager.getInstance().saveBooks(); // or any method you have to persist the changes
+                BookManager.getInstance().saveBooks();
             }
         });
     }

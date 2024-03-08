@@ -10,32 +10,32 @@ import java.io.IOException;
 public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        // Initialize user list with admin if not already done
+
+        //Initialize user list (with admin if not already done. it's not necessary to do that as we explained why in the pdf)
         UserDataManager.getInstance().initializeUserList();
-        // Clear the user list (if needed)
+        //Clear the user list (if needed)
         //UserDataManager.clearUserList();
 
-        // Optionally, print users to console for debugging purposes
+        //print users to console for debugging
         UserDataManager.getInstance().printUsers();
 
-        // Initialize BookManager
+        //Initialize BookManager
         BookManager bookManager = BookManager.getInstance();
-        // Clear comments from all books
+        //Clear comments from all books
         //  for (Book book : bookManager.getBooks()) {
         //     book.clearComments();
         // }
-        // Save the books if your application uses persistent storage
+        //Save the books if your application uses persistent storage
         bookManager.saveBooks();
 
         BorrowingRecordManager borrowedbooks = BorrowingRecordManager.getInstance();
         borrowedbooks.printAllBorrowingRecords();
 
-        // Print list of books to console
+        //Print list of books to console
         bookManager.printBooks();
 
 
         // testCategorySerialization();
-
         //CategoryManager categoryManager = CategoryManager.getInstance();
         //categoryManager.clearCategories();
 
@@ -46,6 +46,7 @@ public class MainApplication extends Application {
         stage.show();
     }
 
+    //used for debugging
     private void testcategoryserialization() {
         //singleton for CategoryMan
         CategoryManager categoryManager = CategoryManager.getInstance();

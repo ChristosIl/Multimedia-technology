@@ -20,7 +20,7 @@ public class UserDashboardController {
     @FXML
     public Button logoutButton, searchButton;
     @FXML
-    private Label welcomeLabel; // Reference to the welcome label
+    private Label welcomeLabel;
     @FXML
     private TableView booksTable;
     @FXML
@@ -30,6 +30,7 @@ public class UserDashboardController {
     private User currentUser;
     @FXML
     public void initialize() {
+        //we pass the information of the books
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         isbnColumn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -40,10 +41,10 @@ public class UserDashboardController {
         //put books on the table
         populateTableView();
 
-        //Listener to watch the search Field
+        //Listener to watch the search Field for any changes
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterBooks(newValue));
 
-        //borrow context menu
+        //Context menu(right click :) )
         ContextMenu contextMenu = new ContextMenu();
         MenuItem borrowItem = new MenuItem("Borrow this book");
         MenuItem viewCommentsItem = new MenuItem("View Comments and Rating");
@@ -78,21 +79,14 @@ public class UserDashboardController {
     }
 
 
-    //must be deleted TODO
-    public void setWelcomeText(String text) {
-        welcomeLabel.setText(text);
-    }
-
     @FXML
     private void handleLogoutAction() throws IOException {
-        // Load the login page FXML
+        //Load the login page FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = loader.load();
 
-        // Get the current window (stage) from the welcome label
+        //Get the current window (stage) from the welcome label
         Stage stage = (Stage) welcomeLabel.getScene().getWindow();
-
-        // Set the login scene to the stage
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -107,13 +101,13 @@ public class UserDashboardController {
             UsersBooksOnLoanController controller = loader.getController();
             controller.setCurrentUser(currentUser);
 
-            //Get the current window (stage) from any component, here using the username TextField
+            //Get the current window (stage) from any component (here using the username TextField)
             Stage stage = (Stage) booksTable.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace(); //catch any exception
         }
     }
 
@@ -154,6 +148,8 @@ public class UserDashboardController {
 
     private void borrowBook(Book selectedBook) {
         int activeBorrowings = BorrowingRecordManager.getInstance().countActiveBorrowingsForUser(currentUser.getIdNumber());
+
+        //checking if the user borrowed bookes over 2 times (he can't)
         if (activeBorrowings >= 2) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Borrowing Limit Reached");
@@ -164,15 +160,17 @@ public class UserDashboardController {
             return;
         }
 
+        //Alert if there are no copies available
         if (selectedBook.getNumberOfCopies() <= 0) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION); // Use INFORMATION or WARNING based on your preference
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Book Unavailable");
-            alert.setHeaderText(null); // You can set this to something specific or leave it null to have no header
+            alert.setHeaderText(null);
             alert.setContentText("There are no copies of the book available.");
 
             alert.showAndWait();
             System.out.println("There are no copies of the book available.");
         } else {
+            //If there are more than 0
             //Decrease book copies and update the list
             BookManager.getInstance().decreaseBookCopies(selectedBook.getIsbn());
             populateTableView();
@@ -191,15 +189,14 @@ public class UserDashboardController {
             Parent root = loader.load();
 
             AboutMeController controller = loader.getController();
-            controller.setCurrentUser(currentUser);
+            controller.setCurrentUser(currentUser); //pass the user's information
 
-            //Get the current window (stage) from any component, here using the username TextField
             Stage stage = (Stage) booksTable.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         }
     }
 
@@ -212,7 +209,7 @@ public class UserDashboardController {
             controller.setBook(book);
             controller.setCurrentUser(currentUser);
 
-            Scene currentScene = booksTable.getScene(); // Assuming booksTable is part of the current scene
+            Scene currentScene = booksTable.getScene();
             currentScene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

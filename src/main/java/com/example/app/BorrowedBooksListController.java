@@ -76,7 +76,7 @@ public class BorrowedBooksListController {
                 if (selectedRecord != null) {
                     System.out.println("Selected record for termination: " + selectedRecord.getBookIsbn());
 
-                    // Show confirmation dialog
+                    //Show confirmation dialog
                     boolean confirmation = showConfirmationDialog(
                             "Terminate Loan Confirmation",
                             "Are you sure you want to terminate the loan for the selected book?");

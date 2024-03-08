@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Book implements Serializable {
-    private static final long serialVersionUID = 1L; //needs for serialization
+    private static final long serialVersionUID = 1L; //needs for serialization (ID)
 
-    private float averageRating;
     private int rating;
     //book's data
     private String title;
     private String author;
-    private String publisher;
     private String publishingHouse;
     private String isbn;
     private int yearOfPublishing;
@@ -20,7 +18,8 @@ public class Book implements Serializable {
     private int numberOfCopies;
     private List<Integer> ratings;
     private List<String> comments;
-    // Constructor
+
+    //Constructor
     public Book(String title, String author, String publishingHouse, String isbn, int yearOfPublishing, Category category, int numberOfCopies) {
         this.title = title;
         this.author = author;
@@ -33,10 +32,8 @@ public class Book implements Serializable {
         this.comments = new ArrayList<>();
     }
 
-    // Setters
-    public void setRating(int Rating) {
-        this.rating = Rating;
-    }
+    //Setters
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -59,11 +56,8 @@ public class Book implements Serializable {
         this.numberOfCopies = numberOfCopies;
     }
 
-    // Getters
+    //Getters
 
-    public int getRating() {
-        return rating;
-    }
     public String getTitle() {
         return title;
     }
@@ -92,9 +86,9 @@ public class Book implements Serializable {
         return numberOfCopies;
     }
 
-    public List<Integer> getRatings() {
+    /*public List<Integer> getRatings() {
         return ratings;
-    }
+    }*/
 
     public double getAverageRating() {
         if (ratings == null || ratings.isEmpty()) {

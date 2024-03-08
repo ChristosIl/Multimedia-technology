@@ -20,36 +20,29 @@ public class EditUserFormController {
     @FXML
     private Label usernameErrorLabel, idNumberErrorLabel, passwordLabel, nameLabel, surnameLabel, emailErrorLabel;
 
-    //initialize data from Uselistcontroller
+    //initialize data from Userlistcontroller
     public void initData(User user) {
         this.currentUser = user;
-        // Initialize form fields with user data
+        //Setting up the information for the form fields with user data
         username.setText(user.getUsername());
         nameField.setText(user.getName());
         password.setText(user.getPassword());
         surname.setText(user.getSurname());
         idnumberField.setText(user.getIdNumber());
         email.setText(user.getEmail());
-        // Initialize other fields in a similar manner...
     }
 
     @FXML
     private void handleGoBackAction() throws IOException {
-        // Load the FXML file for the scene you want to switch to
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserList.fxml")); // Update the path accordingly
+        //We load the fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserList.fxml"));
         Parent root = loader.load();
 
-        // Get the current stage using the scene associated with any control
+
         Stage stage = (Stage) username.getScene().getWindow();
-
-        // Set the scene to the stage
         stage.setScene(new Scene(root));
-
-        // (Optional) Set the title of the stage
         stage.setTitle("List of Users");
-
-        // Show the stage if not already visible
-        stage.show();
+        stage.show(); //show if not visible
     }
 
     @FXML
@@ -59,7 +52,7 @@ public class EditUserFormController {
         if (!allFieldsValid) {
             return; //Stop the sign-up process if any field is invalid
         }
-        // Update the currentUser object with new values from form fields
+        //We update the currentUser object with new values from form fields
         currentUser.setUsername(username.getText());
         currentUser.setPassword(password.getText());
         currentUser.setName(nameField.getText());
@@ -67,19 +60,18 @@ public class EditUserFormController {
         currentUser.setIdNumber(idnumberField.getText());
         currentUser.setEmail(email.getText());
 
-        // Call UserDataManager to update the user list and save it
+        //We call UserDataManager and update the user list and then we save it
         UserDataManager.getInstance().updateUser(currentUser);
 
-
-        switchToUserListView();
+        switchToUserListView(); //save and go back
     }
 
     private void switchToUserListView() throws IOException {
-        // Load the FXML file for the user list scene
+        //Load the FXML file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserList.fxml"));
         Parent userListRoot = loader.load();
 
-
+        //we pass the changes back
         UserListController controller = loader.getController();
         controller.refreshUserList();
 
@@ -88,40 +80,36 @@ public class EditUserFormController {
         stage.show();
     }
 
+    //checking for empty fields
     private boolean validateFields() {
         boolean allFieldsValid = true;
 
-        //Check if username is empty
         if (username.getText().isEmpty()) {
             usernameErrorLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if password is empty
         if (password.getText().isEmpty()) {
             passwordLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Name is empty
         if (nameField.getText().isEmpty()) {
             nameLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Surname is empty
         if (surname.getText().isEmpty()) {
             surnameLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Id_number is empty
         if (idnumberField.getText().isEmpty()) {
             idNumberErrorLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Validate email format
+        //Checking for correct email format
         String emailText = email.getText();
         if (emailText.isEmpty() || !emailText.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
             emailErrorLabel.setText("Invalid email format");

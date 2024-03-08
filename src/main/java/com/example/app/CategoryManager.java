@@ -86,7 +86,7 @@ public class CategoryManager {
                 e.printStackTrace();
             }
         }
-        //Return an empty list if the file doesn't exist or an error occurs
+        //Return an empty list if the file doesn't exist or if an error happens
         return new ArrayList<>();
     }
     public Category findOrCreateCategory(String name) {

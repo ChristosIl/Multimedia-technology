@@ -10,7 +10,7 @@
 
     <Label fx:id="SignUp" layoutX="222.0" layoutY="14.0" text="Sign Up">
         <font>
-            <Font size="45.0" />
+            <Font name="Bell MT" size="45.0" />
         </font></Label>
    <Label layoutX="57.0" layoutY="80.0" prefHeight="17.0" prefWidth="121.0" text="Username:" />
    <TextField fx:id="username" layoutX="57.0" layoutY="97.0" prefHeight="25.0" prefWidth="206.0" />

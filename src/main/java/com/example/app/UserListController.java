@@ -32,6 +32,7 @@ public class UserListController {
 
     @FXML
     public void initialize() {
+        //Pass the information to the cells
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
@@ -39,10 +40,10 @@ public class UserListController {
         idnumberColumn.setCellValueFactory(new PropertyValueFactory<>("idNumber"));
         passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
 
-        // Load users into the table
+        //Put users into the table
         usersTable.setItems(loadUsers());
 
-        //context menu to delete book
+        //context menu to delete/edit user
         ContextMenu contextMenu = new ContextMenu();
         MenuItem deleteItem = new MenuItem("Delete user");
         MenuItem editItem = new MenuItem("Edit");
@@ -56,6 +57,7 @@ public class UserListController {
             }
         });
 
+        //Action for editing a user
         editItem.setOnAction(event -> {
             User selectedUser = usersTable.getSelectionModel().getSelectedItem();
             if (selectedUser != null) {
@@ -64,7 +66,7 @@ public class UserListController {
                     Parent root = loader.load();
 
                     EditUserFormController controller = loader.getController();
-                    controller.initData(selectedUser); // Method to pass data to the edit form
+                    controller.initData(selectedUser); //Pass data to the edit form
 
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) usersTable.getScene().getWindow();
@@ -83,7 +85,7 @@ public class UserListController {
             row.contextMenuProperty().bind(
                     Bindings.when(Bindings.isNotNull(row.itemProperty()))
                             .then(contextMenu)
-                            .otherwise((ContextMenu) null)); // Ensures the context menu is shown only for non-empty rows.
+                            .otherwise((ContextMenu) null));
             return row;
         });
 
@@ -91,22 +93,23 @@ public class UserListController {
 
 
     private ObservableList<User> loadUsers() {
-        // Initialize the ObservableList
+        //Initialize the ObservableList
         ObservableList<User> users = FXCollections.observableArrayList();
 
-        // Assuming you have a UserManager or similar class that can return all registered users
+        //Return all registered users
         List<User> registeredUsers = UserDataManager.getInstance().getUsers();
 
-        // Add all registered users to the ObservableList
+        //Add all registered users to the ObservableList
         users.addAll(registeredUsers);
 
         return users;
     }
 
     private void deleteUser(User user) {
-        // Correctly calling deleteBook on BookManager's instance
+        //deleteBook on BookManager's instance
         UserDataManager.getInstance().deleteUser(user);
-        // Refresh the TableView with the updated list
+
+        //Refresh the TableView with the updated list
         usersTable.setItems(FXCollections.observableArrayList(UserDataManager.getInstance().getUsers()));
     }
 

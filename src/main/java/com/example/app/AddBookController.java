@@ -21,7 +21,7 @@ public class AddBookController {
     @FXML
     private Button goBackButton;
 
-    private BookManager bookManager = BookManager.getInstance(); //singleton pattern
+    private BookManager bookManager = BookManager.getInstance(); //singleton pattern(instance)
 
     @FXML
     private void handleAddBookAction(ActionEvent event) {
@@ -40,7 +40,7 @@ public class AddBookController {
         int yearOfPublishing = Integer.parseInt(yearStr);
         int numberOfCopies = Integer.parseInt(copiesStr);
 
-        CategoryManager categoryManager = CategoryManager.getInstance(); //singleton pattern
+        CategoryManager categoryManager = CategoryManager.getInstance(); //singleton pattern (instance)
         Category category = categoryManager.findOrCreateCategory(categoryName);
         categoryManager.saveCategories();
         //Checking existing books by ISBN
@@ -50,7 +50,7 @@ public class AddBookController {
         }
 
         Book newBook = new Book(title, author, publisher , isbn, yearOfPublishing, category, numberOfCopies);
-        bookManager.addBook(newBook); //adding the book to the list of books
+        bookManager.addBook(newBook); //adding the book to the book list
 
         if (bookListener != null) {
             bookListener.onBookUpdated();

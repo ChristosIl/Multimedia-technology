@@ -35,7 +35,6 @@ public class BookDetailsController {
         UserDashboardController dashboardController = loader.getController();
         dashboardController.setCurrentUser(currentUser);
 
-
         Stage stage = (Stage) GoBackButton.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

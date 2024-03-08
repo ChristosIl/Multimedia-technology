@@ -19,11 +19,11 @@ public class AdminsBookDetailsController {
     private Button GoBackButton;
     @FXML
     private Label titleLabel;
-    @FXML
-    private ListView<String> commentsListView;
+    //@FXML
+    //private ListView<String> commentsListView;
     @FXML
     private Label ratingLabel;
-    private User currentUser;
+    //private User currentUser;
     @FXML
     private VBox commentsVBox;
     private Book book;
@@ -46,14 +46,13 @@ public class AdminsBookDetailsController {
         titleLabel.setText(book.getTitle());
         ratingLabel.setText("Average Rating: " + String.format("%.2f", book.getAverageRating()));
 
-        // Clear existing comments from the VBox
         commentsVBox.getChildren().clear();
         commentsVBox.setSpacing(10);
 
-        // Dynamically add each comment as a label to the VBox
-        for (String comment : book.getComments()) { // Assuming getComments() returns List<String>
+        //put each comment as a label dynamically
+        for (String comment : book.getComments()) {
             Label commentLabel = new Label(comment);
-            commentLabel.setWrapText(true); // Allow line wrapping
+            commentLabel.setWrapText(true);
             commentsVBox.getChildren().add(commentLabel);
         }
     }

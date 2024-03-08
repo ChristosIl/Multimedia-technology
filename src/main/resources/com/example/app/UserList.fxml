@@ -3,6 +3,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.UserListController">
     <TableView fx:id="usersTable" layoutX="32.0" layoutY="121.0" prefHeight="200.0" prefWidth="530.0">
@@ -16,4 +18,9 @@
             
         </columns>
     </TableView>
+   <Text layoutX="195.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USERS LIST" wrappingWidth="210.13671875">
+      <font>
+         <Font name="Bell MT" size="36.0" />
+      </font>
+   </Text>
 </AnchorPane>

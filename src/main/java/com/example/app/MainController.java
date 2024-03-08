@@ -36,6 +36,7 @@ public class MainController {
         loadCss();
     }
 
+    //We load the css
     private void loadCss() {
         String css = this.getClass().getResource("/com/example/app/css/style.css").toExternalForm();
         rootPane.getStylesheets().add(css);
@@ -49,9 +50,9 @@ public class MainController {
         String usernameText = username.getText();
         String passwordText = password.getText();
 
-        // Check if either the username or password fields are empty
+        //Check if either the username or password fields are empty
         if (usernameText.isEmpty() || passwordText.isEmpty()) {
-            // Display message prompting the user to fill in all fields
+            //message to fill in the fields
             if (usernameText.isEmpty()) {
                 errorLabel_2.setText("You must fill in this field");
             }
@@ -59,11 +60,11 @@ public class MainController {
                 errorLabel.setText("You must fill in this field");
             }
         } else {
-            List<User> users = UserDataManager.getInstance().getUsers(); // Adjusted to use getInstance().getUsers()
+            List<User> users = UserDataManager.getInstance().getUsers();
             boolean found = false;
             User loggedInUser = null;
 
-            // Admin check (assuming admin has a special handling)
+            //Admin check
             if (usernameText.equalsIgnoreCase("medialab") && passwordText.equals("medialab_2024")) {
                 // Open admin dashboard
                 loadDashboard("Dashboard.fxml");
@@ -72,6 +73,7 @@ public class MainController {
                 return;
             }
 
+            //checking which user is going to log in
             for (User user : users) {
                 if (user.getUsername().equalsIgnoreCase(usernameText) && user.getPassword().equals(passwordText)) {
                     found = true;
@@ -81,7 +83,7 @@ public class MainController {
             }
 
             if (found && loggedInUser != null) {
-                // Proceed to load user-specific dashboard
+                //Proceed to load user's-specific dashboard
                 loadUserDashboard(loggedInUser);
                 System.out.println("Login successfully!");
                 System.out.println("Username: " + usernameText + " Password: " + passwordText);
@@ -103,19 +105,15 @@ public class MainController {
 
             //Get the current window (stage) from any component, here using the username TextField
             Stage stage = (Stage) username.getScene().getWindow();
-
-            // Optionally, create a new stage if you want the sign-up form to open in a new window
-            // Stage stage = new Stage();
-
-            // Set the sign-up scene to the stage and show it
+            //We set the sign-up scene to the stage and we show it
             stage.setScene(new Scene(root));
             stage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         }
     }
-    //user dashboard load
+    //User dashboard load
     private void loadUserDashboard(User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("User-Dashboard.fxml"));
         Parent root = loader.load();
@@ -140,18 +138,18 @@ public class MainController {
     private void displayTopRatedBooks() {
         List<Book> books = BookManager.getInstance().getBooks();
 
-        // Sort the books by their average rating in descending order and limit to top 5
+        //Sort the books by their average rating in descending order and limit to top 5
         List<Book> topRatedBooks = books.stream()
                 .sorted((book1, book2) -> Double.compare(book2.getAverageRating(), book1.getAverageRating()))
                 .limit(5)
                 .collect(Collectors.toList());
 
-        // Extract the titles and average ratings of the top-rated books
+        //Get the titles and average ratings of the top-rated books
         List<String> topRatedBooksInfo = topRatedBooks.stream()
                 .map(book -> book.getTitle() + " - Average Rating: " + String.format("%.2f", book.getAverageRating()))
                 .collect(Collectors.toList());
 
-        // Display the titles and ratings in the ListView
+        //We display the titles and ratings in the ListView
         topRatedBooksListView.setItems(FXCollections.observableArrayList(topRatedBooksInfo));
     }
 

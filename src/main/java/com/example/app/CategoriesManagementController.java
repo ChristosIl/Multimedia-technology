@@ -25,11 +25,10 @@ public class CategoriesManagementController {
 
     @FXML
     private void handlegobackAction() throws IOException {
-        // Load the login page FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml")); //Load login Page
         Parent root = loader.load();
 
-        Stage stage = (Stage) GoBackButton.getScene().getWindow();
+        Stage stage = (Stage) GoBackButton.getScene().getWindow(); //reference point for the current stage
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

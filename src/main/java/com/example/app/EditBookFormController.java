@@ -22,8 +22,7 @@ public class EditBookFormController {
     private Label titleErrorLabel, authorErrorLabel, isbnErrorLabel, yearofpublishingErrorLabel, categoryErrorLabel, numberofcopiesErrorLabel, editedLabel, publisherErrorLabel;
     @FXML
     private void handlegobackAction() throws IOException {
-        // Load the login page FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml")); //Loading the login page FXML
         Parent root = loader.load();
 
         Stage stage = (Stage) GoBackButton.getScene().getWindow();
@@ -36,7 +35,8 @@ public class EditBookFormController {
 
     public void setBook(Book book) {
         this.book = book;
-        // Populate form fields with book details
+
+        //Populate form fields with book details
         titleTextField.setText(book.getTitle());
         authorTextField.setText(book.getAuthor());
         isbnTextField.setText(book.getIsbn());
@@ -115,7 +115,7 @@ public class EditBookFormController {
     }
 
     private void clearErrorLabels() {
-        // Clear all error labels
+        //We clear all error labels
         titleErrorLabel.setText("");
         authorErrorLabel.setText("");
         isbnErrorLabel.setText("");

@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SignUpController {
     @FXML
-    private Label SignUp; // Reference to the welcome label
+    private Label SignUp;
 
     @FXML
     private TextField username;
@@ -45,21 +45,14 @@ public class SignUpController {
     private Label passwordLabel, nameLabel, surnameLabel;
 
 
-    //Method to show the SignUpText
-    public void setSignUp(String text) {
-        SignUp.setText(text);
-    }
 
     @FXML
     private void handleGoBackAction() throws IOException {
-        // Load the login page FXML
+        //Load the login page FXML
         FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
         Parent root = loader.load();
 
-        //Get the current window (stage) from the welcome label
         Stage stage = (Stage) SignUp.getScene().getWindow();
-
-        // Set the login scene to the stage
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -77,6 +70,7 @@ public class SignUpController {
         List<User> users = UserDataManager.getInstance().loadUserList();
         boolean usernameExists = false, idNumberExists = false, emailExists = false;
 
+        //Checking for already existing user
         for (User user : users) {
             if (user.getUsername().equalsIgnoreCase(username.getText())) {
                 usernameExists = true;
@@ -89,6 +83,7 @@ public class SignUpController {
             }
         }
 
+        //if not we create a new one
         if (!usernameExists && !idNumberExists && !emailExists) {
             User newUser = new User(username.getText(), password.getText(), Name.getText(), Surname.getText(), Id_number.getText(), email.getText());
             UserDataManager.getInstance().getUsers().add(newUser);
@@ -99,7 +94,7 @@ public class SignUpController {
             Parent root = loader.load();
 
             UserDashboardController dashboardController = loader.getController();
-            dashboardController.setCurrentUser(newUser); // Assuming you have such a method in your dashboard controller
+            dashboardController.setCurrentUser(newUser);
 
             Stage stage = (Stage) SignUp.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -129,40 +124,37 @@ public class SignUpController {
         surnameLabel.setText("");
     }
 
+    //Checking if fields are empty
     private boolean validateFields() {
         boolean allFieldsValid = true;
 
-        //Check if username is empty
+
         if (username.getText().isEmpty()) {
             usernameErrorLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if password is empty
         if (password.getText().isEmpty()) {
             passwordLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Name is empty
         if (Name.getText().isEmpty()) {
             nameLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Surname is empty
         if (Surname.getText().isEmpty()) {
             surnameLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Check if Id_number is empty
         if (Id_number.getText().isEmpty()) {
             idNumberErrorLabel.setText("This field is empty");
             allFieldsValid = false;
         }
 
-        //Validate email format
+        //Checking for correct email format
         String emailText = email.getText();
         if (emailText.isEmpty() || !emailText.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")) {
             emailErrorLabel.setText("Invalid email format");
@@ -173,17 +165,7 @@ public class SignUpController {
     }
 
 
-
-
-    private void loadScene(String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-        Stage stage = (Stage) SignUp.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    //clear the Text fields /---probably not needed here---/
+    //clear the Text fields /---probably not needed here, but we do it---/
     private void clearForm(){
             username.clear();
             password.clear();

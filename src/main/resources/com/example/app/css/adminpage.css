@@ -81,7 +81,7 @@
 .menu-bar .menu {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-
+}
 
 .menu-bar .menu .label {
     -fx-text-fill: black;

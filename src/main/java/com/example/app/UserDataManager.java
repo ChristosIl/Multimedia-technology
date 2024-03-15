@@ -6,12 +6,21 @@ import java.util.List;
 
 public class UserDataManager {
 
-    private static final String USERS_FILE = "medialab"+ File.separator +"users.ser";
+    private static final String USERS_FILE =  System.getProperty("user.dir") + File.separator + "medialab"+ File.separator +"users.ser";
     private static UserDataManager instance;
     private List<User> users;
 
     private UserDataManager() {
+        ensureDirectoryExists();
         this.users = loadUserList();
+    }
+
+    private void ensureDirectoryExists() {
+        File file = new File(USERS_FILE);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
     }
 
     public static synchronized UserDataManager getInstance() {

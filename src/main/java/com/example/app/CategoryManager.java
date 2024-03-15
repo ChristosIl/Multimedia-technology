@@ -7,9 +7,20 @@ import java.util.List;
 public class CategoryManager {
     private List<Category> categories;
     private static CategoryManager instance;
-    private static final String CATEGORIES_FILE ="medialab"+ File.separator +"categories.ser";
+    private static final String CATEGORIES_FILE =  System.getProperty("user.dir") + File.separator + "medialab"+ File.separator +"categories.ser";
 
-    private CategoryManager() {this.categories = loadCategories();}
+    private CategoryManager() {
+        ensureDirectoryExists();
+        this.categories = loadCategories();
+    }
+
+    private void ensureDirectoryExists() {
+        File file = new File(CATEGORIES_FILE);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+    }
 
     public static synchronized CategoryManager getInstance() {
         if (instance == null) {

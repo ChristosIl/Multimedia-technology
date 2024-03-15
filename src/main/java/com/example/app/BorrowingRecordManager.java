@@ -9,9 +9,19 @@ public class BorrowingRecordManager {
 
     private static BorrowingRecordManager instance; //Singleton instance
     private List<BorrowingRecord> borrowingRecords; //list of borrowing books
-    private static final String BORROWED_BOOKS_FILE = "medialab"+ File.separator +"borrowedbooks.ser";
+    private static final String BORROWED_BOOKS_FILE = System.getProperty("user.dir") + File.separator +"medialab"+ File.separator +"borrowedbooks.ser";
 
-    public BorrowingRecordManager() { borrowingRecords = loadBorrowingRecords(); }
+    public BorrowingRecordManager() {
+        ensureDirectoryExists();
+        borrowingRecords = loadBorrowingRecords(); }
+
+    private void ensureDirectoryExists() {
+        File file = new File(BORROWED_BOOKS_FILE);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+    }
 
     public static synchronized BorrowingRecordManager getInstance() {
         if (instance == null) {

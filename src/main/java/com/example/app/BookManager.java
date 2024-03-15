@@ -14,9 +14,14 @@ public class BookManager {
     private List<Book> books; //Collection of Books
 
     //Path to the serialized file storing the books
-    private static final String BOOKS_FILE = "medialab" + File.separator + "books.ser";
+    private static final String BOOKS_FILE = System.getProperty("user.dir") + File.separator + "medialab" + File.separator + "books.ser";
 
-    public BookManager() {
+    /**
+     * Private constructor to prevent instantiation outside of {@link #getInstance()} method.
+     * Ensures the directory exists for book serialization and loads the existing books from the file.
+     */
+    private BookManager() {
+        ensureDirectoryExists();
         books = loadBooks();
     }
 
@@ -46,6 +51,20 @@ public class BookManager {
         books.add(book);
         saveBooks();
     }
+
+    /**
+     * Ensures that the directory for storing the books file exists.
+     * Creates the directory if it does not already exist. Added because when we create the.ser file, we don't know if the directory exists
+     */
+    private void ensureDirectoryExists() {
+        File file = new File(BOOKS_FILE);
+        File parentDir = file.getParentFile();
+        if (!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+    }
+
+
     /**
      * Saves the current list of books to a file we defined at line 17, in the string BOOKS_FILE.
      */
